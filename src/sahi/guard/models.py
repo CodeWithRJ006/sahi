@@ -1,0 +1,47 @@
+"""Domain models for SahiGuard deterministic amount safety verification."""
+
+from enum import Enum
+from typing import Optional, List, Dict, Any
+from pydantic import BaseModel, Field
+
+class GuardAction(str, Enum):
+    EXECUTE = "EXECUTE"
+    READ_BACK = "READ_BACK"
+    RE_ASK = "RE_ASK"
+    ESCALATE = "ESCALATE"
+
+class ReasonCode(str, Enum):
+    AGREEMENT_VERIFIED = "AGREEMENT_VERIFIED"
+    POWER_OF_TEN_MISMATCH = "POWER_OF_TEN_MISMATCH"
+    PHONETIC_CONFUSABLE_MISMATCH = "PHONETIC_CONFUSABLE_MISMATCH"
+    HIGH_VALUE_THRESHOLD = "HIGH_VALUE_THRESHOLD"
+    PARSE_AMBIGUOUS_SELF_CORRECTION = "PARSE_AMBIGUOUS_SELF_CORRECTION"
+    PARSE_AMBIGUOUS_MULTIPLE_AMOUNTS = "PARSE_AMBIGUOUS_MULTIPLE_AMOUNTS"
+    PARSE_AMBIGUOUS_CONFLICT = "PARSE_AMBIGUOUS_CONFLICT"
+    PARSE_UNRECOGNIZED = "PARSE_UNRECOGNIZED"
+    READING_DISCREPANCY = "READING_DISCREPANCY"
+    ZERO_OR_NEGATIVE_AMOUNT = "ZERO_OR_NEGATIVE_AMOUNT"
+    MISSING_READINGS = "MISSING_READINGS"
+
+class RiskLevel(str, Enum):
+    LOW = "LOW"
+    MEDIUM = "MEDIUM"
+    HIGH = "HIGH"
+    CRITICAL = "CRITICAL"
+
+class ReadingSource(BaseModel):
+    source_name: str = Field(..., description="e.g. 'transcript_literal', 'transcript_codemix', 'llm_tool_call'")
+    amount_inr: Optional[int] = Field(None, description="Extracted integer INR amount, if any")
+    raw_text: Optional[str] = None
+    confidence: float = 1.0
+
+class GuardDecision(BaseModel):
+    action: GuardAction
+    final_amount_inr: Optional[int] = Field(None, description="Validated amount safe to execute, if approved")
+    reason_code: ReasonCode
+    risk_level: RiskLevel
+    explanation: str
+    readings: List[ReadingSource] = Field(default_factory=list)
+    discrepancy_factor: Optional[float] = Field(None, description="Ratio if power-of-ten or scale mismatch (e.g. 10.0, 100.0)")
+    requires_readback: bool = False
+    metadata: Dict[str, Any] = Field(default_factory=dict)
