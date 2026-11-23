@@ -94,3 +94,102 @@ class SahiPipeline:
                 "idempotency_key": idempotency_key
             }
         )
+
+    def process_audio_pipeline(
+        self,
+        audio_bytes: bytes,
+        saaras_adapter: Any,
+        llm_adapter: Any,
+        from_account: str = "ACC_USER_001",
+        to_payee_fallback: str = "recipient@upi",
+        idempotency_key: Optional[str] = None
+    ) -> PipelineResult:
+        """
+        Executes full audio pipeline:
+        Audio -> Saaras v4 (transcribe + codemix) -> Sarvam 105B proposal -> SahiGuard -> Mock Bank.
+
+        CRITICAL SAFETY RULE:
+        The LLM only proposes transfer parameters. SahiGuard evaluates consensus across
+        transcript readings and LLM proposal before any simulated execution.
+        """
+        from sahi.guard.models import ReadingSource
+
+        if not idempotency_key:
+            idempotency_key = f"IDEMP_AUDIO_{uuid.uuid4().hex[:10].upper()}"
+
+        # 1. Dual-mode STT transcriptions
+        stt_literal = saaras_adapter.transcribe(audio_bytes, mode="transcribe")
+        stt_codemix = saaras_adapter.transcribe(audio_bytes, mode="codemix")
+
+        # 2. Local Indic amount parsing
+        parsed_literal = self.amount_engine.parse(stt_literal.transcript)
+        parsed_codemix = self.amount_engine.parse(stt_codemix.transcript)
+
+        # 3. LLM structured tool proposal
+        chat_resp = llm_adapter.extract_transfer_proposal(stt_literal.transcript)
+        llm_proposal = chat_resp.proposal
+
+        payee = llm_proposal.payee if (llm_proposal and llm_proposal.payee) else to_payee_fallback
+
+        # 4. Construct SahiGuard candidate readings
+        readings = [
+            ReadingSource(
+                source_name="saaras_literal",
+                amount_inr=parsed_literal.amount_inr,
+                raw_text=stt_literal.transcript,
+                confidence=parsed_literal.confidence
+            ),
+            ReadingSource(
+                source_name="saaras_codemix",
+                amount_inr=parsed_codemix.amount_inr,
+                raw_text=stt_codemix.transcript,
+                confidence=parsed_codemix.confidence
+            )
+        ]
+        if llm_proposal:
+            readings.append(
+                ReadingSource(
+                    source_name="sarvam_105b_proposal",
+                    amount_inr=llm_proposal.amount_inr,
+                    raw_text=str(llm_proposal.raw_arguments),
+                    confidence=1.0
+                )
+            )
+
+        # 5. Deterministic SahiGuard evaluation
+        guard_decision = self.guard.evaluate(readings)
+
+        # 6. Safe simulated execution
+        transfer_resp: Optional[TransferResponse] = None
+        if guard_decision.action == GuardAction.EXECUTE:
+            req = TransferRequest(
+                from_account=from_account,
+                to_payee=payee,
+                amount_inr=guard_decision.final_amount_inr,
+                idempotency_key=idempotency_key,
+                guard_decision=guard_decision.model_dump()
+            )
+            transfer_resp = self.bank_db.execute_transfer(req)
+            pipeline_status = "EXECUTED" if transfer_resp.success else transfer_resp.status
+        elif guard_decision.action == GuardAction.READ_BACK:
+            pipeline_status = "HELD_FOR_READBACK"
+        elif guard_decision.action == GuardAction.RE_ASK:
+            pipeline_status = "HELD_FOR_CLARIFICATION"
+        elif guard_decision.action == GuardAction.ESCALATE:
+            pipeline_status = "ESCALATED"
+        else:
+            pipeline_status = "UNKNOWN_GUARD_ACTION"
+
+        return PipelineResult(
+            status=pipeline_status,
+            parsed_amount=parsed_literal,
+            guard_decision=guard_decision,
+            transfer_response=transfer_resp,
+            audit_metadata={
+                "literal_transcript": stt_literal.transcript,
+                "codemix_transcript": stt_codemix.transcript,
+                "llm_proposed_amount": llm_proposal.amount_inr if llm_proposal else None,
+                "llm_payee": payee,
+                "idempotency_key": idempotency_key
+            }
+        )

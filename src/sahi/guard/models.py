@@ -1,7 +1,7 @@
 """Domain models for SahiGuard deterministic amount safety verification."""
 
 from enum import Enum
-from typing import Optional, List, Dict, Any
+from typing import Optional, List, Dict, Any, ClassVar
 from pydantic import BaseModel, Field
 
 class GuardAction(str, Enum):
@@ -35,6 +35,8 @@ class ReadingSource(BaseModel):
     raw_text: Optional[str] = None
     confidence: float = 1.0
 
+from typing import ClassVar
+
 class GuardDecision(BaseModel):
     action: GuardAction
     final_amount_inr: Optional[int] = Field(None, description="Validated amount safe to execute, if approved")
@@ -45,3 +47,9 @@ class GuardDecision(BaseModel):
     discrepancy_factor: Optional[float] = Field(None, description="Ratio if power-of-ten or scale mismatch (e.g. 10.0, 100.0)")
     requires_readback: bool = False
     metadata: Dict[str, Any] = Field(default_factory=dict)
+
+    # Enum-like shortcuts for backward compatibility / test expectations
+    EXECUTE: ClassVar[GuardAction] = GuardAction.EXECUTE
+    READ_BACK: ClassVar[GuardAction] = GuardAction.READ_BACK
+    RE_ASK: ClassVar[GuardAction] = GuardAction.RE_ASK
+    ESCALATE: ClassVar[GuardAction] = GuardAction.ESCALATE

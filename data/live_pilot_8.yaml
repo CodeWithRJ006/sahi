@@ -1,0 +1,71 @@
+- id: utt_01
+  language_code: te-IN
+  category: ordinary
+  intended_inr: 1500
+  utterance_native: "వెయ్యి ఐదు వందల రూపాయలు పంపించు."
+  utterance_roman: "veyyi aidu vandala rupayalu pampinchu"
+  proposed_speaker: "kavitha_te_conversation"
+  verification_status: VERIFIED
+
+- id: utt_02
+  language_code: te-IN
+  category: challenging
+  intended_inr: 250000
+  utterance_native: "రెండున్నర లక్షల రూపాయలు పంపు."
+  utterance_roman: "rendunnara lakshala rupayalu pampu"
+  proposed_speaker: "kavitha_te_conversation"
+  verification_status: VERIFIED
+
+- id: utt_03
+  language_code: hi-IN
+  category: ordinary
+  intended_inr: 3000
+  utterance_native: "तीन हज़ार रुपये भेजो।"
+  utterance_roman: "teen hazaar rupaye bhejo"
+  proposed_speaker: "ritu_hi_customer"
+  verification_status: VERIFIED
+
+- id: utt_04
+  language_code: hi-IN
+  category: challenging
+  intended_inr: 7500000
+  utterance_native: "पचहत्तर लाख रुपये भेजो।"
+  utterance_roman: "pachhattar lakh rupaye bhejo"
+  proposed_speaker: "ritu_hi_customer"
+  verification_status: VERIFIED
+
+- id: utt_05
+  language_code: hi-IN
+  category: ordinary
+  intended_inr: 1200
+  utterance_native: "बारह सौ रुपये transfer कर दो।"
+  utterance_roman: "baarah sau rupaye transfer kar do"
+  proposed_speaker: "simran_enhi_customer"
+  verification_status: VERIFIED
+
+- id: utt_06
+  language_code: hi-IN
+  category: challenging
+  intended_inr: 9800000
+  utterance_native: "अट्ठानवे लाख रुपये transfer कर दो।"
+  utterance_roman: "atthaanave lakh rupaye transfer kar do"
+  proposed_speaker: "simran_enhi_customer"
+  verification_status: VERIFIED
+
+- id: utt_07
+  language_code: en-IN
+  category: ordinary
+  intended_inr: 500
+  utterance_native: "Send five hundred rupees."
+  utterance_roman: "Send five hundred rupees."
+  proposed_speaker: "simran_en_customer"
+  verification_status: VERIFIED
+
+- id: utt_08
+  language_code: en-IN
+  category: challenging
+  intended_inr: 12500000
+  utterance_native: "Transfer one crore twenty-five lakh rupees."
+  utterance_roman: "Transfer one crore twenty-five lakh rupees."
+  proposed_speaker: "simran_en_customer"
+  verification_status: VERIFIED

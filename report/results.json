@@ -1,0 +1,59 @@
+{
+  "status": "SYNTHETIC_SIMULATION",
+  "baseline": {
+    "arm_name": "Baseline",
+    "total_trials": 72,
+    "total_completed_transfers": 0,
+    "wrong_amount_execution_rate": 0.0,
+    "unsafe_execution_rate": 0.0,
+    "silent_wrong_rate": 0.0,
+    "false_hold_rate": 0.0,
+    "rupees_at_risk_per_1000": 0.0,
+    "no_transfer_rate": 1.0,
+    "parse_failure_rate": 0.0,
+    "ambiguity_rate": 0.0,
+    "read_back_rate": 0.0,
+    "escalation_rate": 0.0,
+    "p50_latency_ms": 0.0,
+    "p95_latency_ms": 0.0,
+    "total_cost_inr": 0.0
+  },
+  "guarded": {
+    "arm_name": "Guarded",
+    "total_trials": 72,
+    "total_completed_transfers": 0,
+    "wrong_amount_execution_rate": 0.0,
+    "unsafe_execution_rate": 0.0,
+    "silent_wrong_rate": 0.0,
+    "false_hold_rate": 0.0,
+    "rupees_at_risk_per_1000": 0.0,
+    "no_transfer_rate": 1.0,
+    "parse_failure_rate": 0.0,
+    "ambiguity_rate": 0.0,
+    "read_back_rate": 0.0,
+    "escalation_rate": 0.0,
+    "p50_latency_ms": 0.0,
+    "p95_latency_ms": 0.0,
+    "total_cost_inr": 0.0
+  },
+  "comparison": {
+    "unsafe_rate_delta": 0.0,
+    "unsafe_rate_delta_ci_95": [
+      0.0,
+      0.0
+    ],
+    "rupees_at_risk_delta": 0.0,
+    "rupees_at_risk_delta_ci_95": [
+      0.0,
+      0.0
+    ],
+    "baseline_only_errors": 0,
+    "guard_only_errors": 0,
+    "shared_errors": 0
+  },
+  "metadata": {
+    "n_clusters": 24,
+    "bootstrap_iterations": 1000,
+    "random_seed": 42
+  }
+}

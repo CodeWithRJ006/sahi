@@ -1,0 +1,1298 @@
+[
+  {
+    "clip_id": "CLIP_UTT_EN_001_CLEAN",
+    "utterance_id": "UTT_EN_001",
+    "condition": "CLEAN",
+    "sha256_hash": "1bf75a5577f585aeb4f82c050745246283b6a5d48cad1a71afd956c6f70e071e",
+    "sample_rate": 16000,
+    "duration_seconds": 3.12,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "clean/CLIP_UTT_EN_001_CLEAN.wav",
+    "metadata": {
+      "language_group": "INDIAN_ENGLISH",
+      "category": "plain_amount",
+      "intended_amount_inr": 5000,
+      "native_text": "Transfer five thousand rupees to Ramesh"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_EN_001_TELEPHONY",
+    "utterance_id": "UTT_EN_001",
+    "condition": "TELEPHONY",
+    "sha256_hash": "9e2c5ad4a23698d1d647f388874a74cfbdfdeee1977a62d85d55b48e73b6f3b3",
+    "sample_rate": 8000,
+    "duration_seconds": 3.12,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony/CLIP_UTT_EN_001_TELEPHONY.wav",
+    "metadata": {
+      "language_group": "INDIAN_ENGLISH",
+      "category": "plain_amount",
+      "intended_amount_inr": 5000,
+      "native_text": "Transfer five thousand rupees to Ramesh"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_EN_001_TELEPHONY_NOISE",
+    "utterance_id": "UTT_EN_001",
+    "condition": "TELEPHONY_NOISE",
+    "sha256_hash": "259c2a6765f1ed2dac2f3a28df119107c490e8e9a20b0fc340094c0e2897ed4e",
+    "sample_rate": 8000,
+    "duration_seconds": 3.12,
+    "snr_db": 10.01,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony_noise/CLIP_UTT_EN_001_TELEPHONY_NOISE.wav",
+    "metadata": {
+      "language_group": "INDIAN_ENGLISH",
+      "category": "plain_amount",
+      "intended_amount_inr": 5000,
+      "native_text": "Transfer five thousand rupees to Ramesh"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_EN_002_CLEAN",
+    "utterance_id": "UTT_EN_002",
+    "condition": "CLEAN",
+    "sha256_hash": "90ee9ed94d507e141d8aeb9b35fa3d4ba07f8bf1589829c6446ab4cf25bd530a",
+    "sample_rate": 16000,
+    "duration_seconds": 2.8,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "clean/CLIP_UTT_EN_002_CLEAN.wav",
+    "metadata": {
+      "language_group": "INDIAN_ENGLISH",
+      "category": "lakh_crore",
+      "intended_amount_inr": 250000,
+      "native_text": "Send two and a half lakhs to Suresh"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_EN_002_TELEPHONY",
+    "utterance_id": "UTT_EN_002",
+    "condition": "TELEPHONY",
+    "sha256_hash": "c752def7ed567508d1901319658906523aa1959356e429505cae16ea0f606111",
+    "sample_rate": 8000,
+    "duration_seconds": 2.8,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony/CLIP_UTT_EN_002_TELEPHONY.wav",
+    "metadata": {
+      "language_group": "INDIAN_ENGLISH",
+      "category": "lakh_crore",
+      "intended_amount_inr": 250000,
+      "native_text": "Send two and a half lakhs to Suresh"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_EN_002_TELEPHONY_NOISE",
+    "utterance_id": "UTT_EN_002",
+    "condition": "TELEPHONY_NOISE",
+    "sha256_hash": "efe1a944eba43a113c15c927710493a2ef2316261c52ed66c759d836baf429ed",
+    "sample_rate": 8000,
+    "duration_seconds": 2.8,
+    "snr_db": 9.99,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony_noise/CLIP_UTT_EN_002_TELEPHONY_NOISE.wav",
+    "metadata": {
+      "language_group": "INDIAN_ENGLISH",
+      "category": "lakh_crore",
+      "intended_amount_inr": 250000,
+      "native_text": "Send two and a half lakhs to Suresh"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_EN_003_CLEAN",
+    "utterance_id": "UTT_EN_003",
+    "condition": "CLEAN",
+    "sha256_hash": "0b99c75ef75cf59f7b14bfebf5dd59e5d755e7cc69482e353b8eb7bf4767d6db",
+    "sample_rate": 16000,
+    "duration_seconds": 3.2,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "clean/CLIP_UTT_EN_003_CLEAN.wav",
+    "metadata": {
+      "language_group": "INDIAN_ENGLISH",
+      "category": "fractional",
+      "intended_amount_inr": 2500,
+      "native_text": "Pay twenty five hundred rupees to Ramesh"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_EN_003_TELEPHONY",
+    "utterance_id": "UTT_EN_003",
+    "condition": "TELEPHONY",
+    "sha256_hash": "a549ff59ae8bfbfde550cac9cfd826cc8c08d4354866f86760ba4ecd4c8bbcd7",
+    "sample_rate": 8000,
+    "duration_seconds": 3.2,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony/CLIP_UTT_EN_003_TELEPHONY.wav",
+    "metadata": {
+      "language_group": "INDIAN_ENGLISH",
+      "category": "fractional",
+      "intended_amount_inr": 2500,
+      "native_text": "Pay twenty five hundred rupees to Ramesh"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_EN_003_TELEPHONY_NOISE",
+    "utterance_id": "UTT_EN_003",
+    "condition": "TELEPHONY_NOISE",
+    "sha256_hash": "4423569dde7243a34496d3845f088181cf6e2ef2d3c6c82c69a83ad1a8f599d3",
+    "sample_rate": 8000,
+    "duration_seconds": 3.2,
+    "snr_db": 10.02,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony_noise/CLIP_UTT_EN_003_TELEPHONY_NOISE.wav",
+    "metadata": {
+      "language_group": "INDIAN_ENGLISH",
+      "category": "fractional",
+      "intended_amount_inr": 2500,
+      "native_text": "Pay twenty five hundred rupees to Ramesh"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_EN_004_CLEAN",
+    "utterance_id": "UTT_EN_004",
+    "condition": "CLEAN",
+    "sha256_hash": "84ef78618ca48684b36e22cc6c293d97a01407a0c124032f2ca13d8f456a3040",
+    "sample_rate": 16000,
+    "duration_seconds": 2.56,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "clean/CLIP_UTT_EN_004_CLEAN.wav",
+    "metadata": {
+      "language_group": "INDIAN_ENGLISH",
+      "category": "confusable",
+      "intended_amount_inr": 15000,
+      "native_text": "Transfer fifteen thousand rupees"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_EN_004_TELEPHONY",
+    "utterance_id": "UTT_EN_004",
+    "condition": "TELEPHONY",
+    "sha256_hash": "f2b3aece40ddeed4d233c3615ad08aa93d4d2b5db24655ee96599e0da8c3747c",
+    "sample_rate": 8000,
+    "duration_seconds": 2.56,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony/CLIP_UTT_EN_004_TELEPHONY.wav",
+    "metadata": {
+      "language_group": "INDIAN_ENGLISH",
+      "category": "confusable",
+      "intended_amount_inr": 15000,
+      "native_text": "Transfer fifteen thousand rupees"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_EN_004_TELEPHONY_NOISE",
+    "utterance_id": "UTT_EN_004",
+    "condition": "TELEPHONY_NOISE",
+    "sha256_hash": "ea7b517c9329614ecc04d2d05e461ff00368deb30a97f4c6ade21e04fad43319",
+    "sample_rate": 8000,
+    "duration_seconds": 2.56,
+    "snr_db": 9.97,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony_noise/CLIP_UTT_EN_004_TELEPHONY_NOISE.wav",
+    "metadata": {
+      "language_group": "INDIAN_ENGLISH",
+      "category": "confusable",
+      "intended_amount_inr": 15000,
+      "native_text": "Transfer fifteen thousand rupees"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_EN_005_CLEAN",
+    "utterance_id": "UTT_EN_005",
+    "condition": "CLEAN",
+    "sha256_hash": "45cbe151d363f6f886f62139d090aa9e176a2d4739d70e3793814f1d96a2168b",
+    "sample_rate": 16000,
+    "duration_seconds": 2.72,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "clean/CLIP_UTT_EN_005_CLEAN.wav",
+    "metadata": {
+      "language_group": "INDIAN_ENGLISH",
+      "category": "codemix",
+      "intended_amount_inr": 5000,
+      "native_text": "Please send 5k right now to Suresh"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_EN_005_TELEPHONY",
+    "utterance_id": "UTT_EN_005",
+    "condition": "TELEPHONY",
+    "sha256_hash": "d373939df3b924fbc8ae8b55918fe8cd24ebcbfd4f5f01b7f7bd6c9a6aa6b2f5",
+    "sample_rate": 8000,
+    "duration_seconds": 2.72,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony/CLIP_UTT_EN_005_TELEPHONY.wav",
+    "metadata": {
+      "language_group": "INDIAN_ENGLISH",
+      "category": "codemix",
+      "intended_amount_inr": 5000,
+      "native_text": "Please send 5k right now to Suresh"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_EN_005_TELEPHONY_NOISE",
+    "utterance_id": "UTT_EN_005",
+    "condition": "TELEPHONY_NOISE",
+    "sha256_hash": "107204678dd40a2518867b4815387c8816994068048f1f1bf9eba9460c9c1677",
+    "sample_rate": 8000,
+    "duration_seconds": 2.72,
+    "snr_db": 9.98,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony_noise/CLIP_UTT_EN_005_TELEPHONY_NOISE.wav",
+    "metadata": {
+      "language_group": "INDIAN_ENGLISH",
+      "category": "codemix",
+      "intended_amount_inr": 5000,
+      "native_text": "Please send 5k right now to Suresh"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_EN_006_CLEAN",
+    "utterance_id": "UTT_EN_006",
+    "condition": "CLEAN",
+    "sha256_hash": "0b99c75ef75cf59f7b14bfebf5dd59e5d755e7cc69482e353b8eb7bf4767d6db",
+    "sample_rate": 16000,
+    "duration_seconds": 3.2,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "clean/CLIP_UTT_EN_006_CLEAN.wav",
+    "metadata": {
+      "language_group": "INDIAN_ENGLISH",
+      "category": "self_correction",
+      "intended_amount_inr": 5000,
+      "native_text": "Send 500 rupees, no wait, make that 5000"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_EN_006_TELEPHONY",
+    "utterance_id": "UTT_EN_006",
+    "condition": "TELEPHONY",
+    "sha256_hash": "a549ff59ae8bfbfde550cac9cfd826cc8c08d4354866f86760ba4ecd4c8bbcd7",
+    "sample_rate": 8000,
+    "duration_seconds": 3.2,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony/CLIP_UTT_EN_006_TELEPHONY.wav",
+    "metadata": {
+      "language_group": "INDIAN_ENGLISH",
+      "category": "self_correction",
+      "intended_amount_inr": 5000,
+      "native_text": "Send 500 rupees, no wait, make that 5000"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_EN_006_TELEPHONY_NOISE",
+    "utterance_id": "UTT_EN_006",
+    "condition": "TELEPHONY_NOISE",
+    "sha256_hash": "4423569dde7243a34496d3845f088181cf6e2ef2d3c6c82c69a83ad1a8f599d3",
+    "sample_rate": 8000,
+    "duration_seconds": 3.2,
+    "snr_db": 10.02,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony_noise/CLIP_UTT_EN_006_TELEPHONY_NOISE.wav",
+    "metadata": {
+      "language_group": "INDIAN_ENGLISH",
+      "category": "self_correction",
+      "intended_amount_inr": 5000,
+      "native_text": "Send 500 rupees, no wait, make that 5000"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HI_001_CLEAN",
+    "utterance_id": "UTT_HI_001",
+    "condition": "CLEAN",
+    "sha256_hash": "29bd4781bce165a9ea4977c6f1b92f89a49c030561ac3dd0dd6670d7cf38a332",
+    "sample_rate": 16000,
+    "duration_seconds": 2.32,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "clean/CLIP_UTT_HI_001_CLEAN.wav",
+    "metadata": {
+      "language_group": "HINDI",
+      "category": "plain_amount",
+      "intended_amount_inr": 5000,
+      "native_text": "रमेश को पाँच हज़ार रुपये भेजो"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HI_001_TELEPHONY",
+    "utterance_id": "UTT_HI_001",
+    "condition": "TELEPHONY",
+    "sha256_hash": "a211f461359ca7d82c32e072ba725477d55b27b87a2ea9d805074d3e1f8231c9",
+    "sample_rate": 8000,
+    "duration_seconds": 2.32,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony/CLIP_UTT_HI_001_TELEPHONY.wav",
+    "metadata": {
+      "language_group": "HINDI",
+      "category": "plain_amount",
+      "intended_amount_inr": 5000,
+      "native_text": "रमेश को पाँच हज़ार रुपये भेजो"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HI_001_TELEPHONY_NOISE",
+    "utterance_id": "UTT_HI_001",
+    "condition": "TELEPHONY_NOISE",
+    "sha256_hash": "56fb415d1d0f41d54678c1dc20108d01d2cb4919c69fe0ec9f088405b9b4006d",
+    "sample_rate": 8000,
+    "duration_seconds": 2.32,
+    "snr_db": 9.98,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony_noise/CLIP_UTT_HI_001_TELEPHONY_NOISE.wav",
+    "metadata": {
+      "language_group": "HINDI",
+      "category": "plain_amount",
+      "intended_amount_inr": 5000,
+      "native_text": "रमेश को पाँच हज़ार रुपये भेजो"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HI_002_CLEAN",
+    "utterance_id": "UTT_HI_002",
+    "condition": "CLEAN",
+    "sha256_hash": "4c4bc62a5195f869c7dae54865630f0e09b840d7060c45f5c1ebe74e579e6639",
+    "sample_rate": 16000,
+    "duration_seconds": 2.4,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "clean/CLIP_UTT_HI_002_CLEAN.wav",
+    "metadata": {
+      "language_group": "HINDI",
+      "category": "lakh_crore",
+      "intended_amount_inr": 150000,
+      "native_text": "सुरेश को डेढ़ लाख रुपये भेज दो"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HI_002_TELEPHONY",
+    "utterance_id": "UTT_HI_002",
+    "condition": "TELEPHONY",
+    "sha256_hash": "47666901bb1def6d2aaaef710e151909a310888f15357708583fd67fbad898d6",
+    "sample_rate": 8000,
+    "duration_seconds": 2.4,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony/CLIP_UTT_HI_002_TELEPHONY.wav",
+    "metadata": {
+      "language_group": "HINDI",
+      "category": "lakh_crore",
+      "intended_amount_inr": 150000,
+      "native_text": "सुरेश को डेढ़ लाख रुपये भेज दो"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HI_002_TELEPHONY_NOISE",
+    "utterance_id": "UTT_HI_002",
+    "condition": "TELEPHONY_NOISE",
+    "sha256_hash": "b8ea3811bf0afbf247c66c1b27c79c2656706c81912f8112127aa07cb64cbd37",
+    "sample_rate": 8000,
+    "duration_seconds": 2.4,
+    "snr_db": 9.98,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony_noise/CLIP_UTT_HI_002_TELEPHONY_NOISE.wav",
+    "metadata": {
+      "language_group": "HINDI",
+      "category": "lakh_crore",
+      "intended_amount_inr": 150000,
+      "native_text": "सुरेश को डेढ़ लाख रुपये भेज दो"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HI_003_CLEAN",
+    "utterance_id": "UTT_HI_003",
+    "condition": "CLEAN",
+    "sha256_hash": "a67e84e3e4e0d58521583eca1c81643960ea8ee5d276e842579dc60c807b0388",
+    "sample_rate": 16000,
+    "duration_seconds": 2.24,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "clean/CLIP_UTT_HI_003_CLEAN.wav",
+    "metadata": {
+      "language_group": "HINDI",
+      "category": "fractional",
+      "intended_amount_inr": 2500,
+      "native_text": "ढाई हज़ार रुपये ट्रांसफर करो"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HI_003_TELEPHONY",
+    "utterance_id": "UTT_HI_003",
+    "condition": "TELEPHONY",
+    "sha256_hash": "7b38eb475aac531b0cd398a5aa03ae8c8beb588740849347254e545be84a1bdc",
+    "sample_rate": 8000,
+    "duration_seconds": 2.24,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony/CLIP_UTT_HI_003_TELEPHONY.wav",
+    "metadata": {
+      "language_group": "HINDI",
+      "category": "fractional",
+      "intended_amount_inr": 2500,
+      "native_text": "ढाई हज़ार रुपये ट्रांसफर करो"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HI_003_TELEPHONY_NOISE",
+    "utterance_id": "UTT_HI_003",
+    "condition": "TELEPHONY_NOISE",
+    "sha256_hash": "665a033e3fb4c033b019254949174a91af698c0b0c416105ce7e230ecc142aaa",
+    "sample_rate": 8000,
+    "duration_seconds": 2.24,
+    "snr_db": 9.98,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony_noise/CLIP_UTT_HI_003_TELEPHONY_NOISE.wav",
+    "metadata": {
+      "language_group": "HINDI",
+      "category": "fractional",
+      "intended_amount_inr": 2500,
+      "native_text": "ढाई हज़ार रुपये ट्रांसफर करो"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HI_004_CLEAN",
+    "utterance_id": "UTT_HI_004",
+    "condition": "CLEAN",
+    "sha256_hash": "9e83abe452da29b2b1c6efc6118d973dbc28559c9f732794ad1d0eef92235fbf",
+    "sample_rate": 16000,
+    "duration_seconds": 1.84,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "clean/CLIP_UTT_HI_004_CLEAN.wav",
+    "metadata": {
+      "language_group": "HINDI",
+      "category": "confusable",
+      "intended_amount_inr": 15000,
+      "native_text": "पंद्रह हज़ार रुपये भेजो"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HI_004_TELEPHONY",
+    "utterance_id": "UTT_HI_004",
+    "condition": "TELEPHONY",
+    "sha256_hash": "73ba72c00e30f19e6974e22074b425496c01cf75ce9029e5f37812a737e93116",
+    "sample_rate": 8000,
+    "duration_seconds": 1.84,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony/CLIP_UTT_HI_004_TELEPHONY.wav",
+    "metadata": {
+      "language_group": "HINDI",
+      "category": "confusable",
+      "intended_amount_inr": 15000,
+      "native_text": "पंद्रह हज़ार रुपये भेजो"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HI_004_TELEPHONY_NOISE",
+    "utterance_id": "UTT_HI_004",
+    "condition": "TELEPHONY_NOISE",
+    "sha256_hash": "515386c3cfcb04ef669ffac4dfb32716429483b52bcc70ca005cfa3509d994b6",
+    "sample_rate": 8000,
+    "duration_seconds": 1.84,
+    "snr_db": 9.98,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony_noise/CLIP_UTT_HI_004_TELEPHONY_NOISE.wav",
+    "metadata": {
+      "language_group": "HINDI",
+      "category": "confusable",
+      "intended_amount_inr": 15000,
+      "native_text": "पंद्रह हज़ार रुपये भेजो"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HI_005_CLEAN",
+    "utterance_id": "UTT_HI_005",
+    "condition": "CLEAN",
+    "sha256_hash": "84ef78618ca48684b36e22cc6c293d97a01407a0c124032f2ca13d8f456a3040",
+    "sample_rate": 16000,
+    "duration_seconds": 2.56,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "clean/CLIP_UTT_HI_005_CLEAN.wav",
+    "metadata": {
+      "language_group": "HINDI",
+      "category": "codemix",
+      "intended_amount_inr": 3500,
+      "native_text": "साढ़े तीन हज़ार google pay कर दो"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HI_005_TELEPHONY",
+    "utterance_id": "UTT_HI_005",
+    "condition": "TELEPHONY",
+    "sha256_hash": "f2b3aece40ddeed4d233c3615ad08aa93d4d2b5db24655ee96599e0da8c3747c",
+    "sample_rate": 8000,
+    "duration_seconds": 2.56,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony/CLIP_UTT_HI_005_TELEPHONY.wav",
+    "metadata": {
+      "language_group": "HINDI",
+      "category": "codemix",
+      "intended_amount_inr": 3500,
+      "native_text": "साढ़े तीन हज़ार google pay कर दो"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HI_005_TELEPHONY_NOISE",
+    "utterance_id": "UTT_HI_005",
+    "condition": "TELEPHONY_NOISE",
+    "sha256_hash": "ea7b517c9329614ecc04d2d05e461ff00368deb30a97f4c6ade21e04fad43319",
+    "sample_rate": 8000,
+    "duration_seconds": 2.56,
+    "snr_db": 9.97,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony_noise/CLIP_UTT_HI_005_TELEPHONY_NOISE.wav",
+    "metadata": {
+      "language_group": "HINDI",
+      "category": "codemix",
+      "intended_amount_inr": 3500,
+      "native_text": "साढ़े तीन हज़ार google pay कर दो"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HI_006_CLEAN",
+    "utterance_id": "UTT_HI_006",
+    "condition": "CLEAN",
+    "sha256_hash": "9b0922cd171043a16570c71967637d13fe7857c6d74415a878e5abe5e10c078b",
+    "sample_rate": 16000,
+    "duration_seconds": 2.64,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "clean/CLIP_UTT_HI_006_CLEAN.wav",
+    "metadata": {
+      "language_group": "HINDI",
+      "category": "self_correction",
+      "intended_amount_inr": 20000,
+      "native_text": "दो हज़ार भेजो, अरे नहीं बीस हज़ार"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HI_006_TELEPHONY",
+    "utterance_id": "UTT_HI_006",
+    "condition": "TELEPHONY",
+    "sha256_hash": "2486854dfe97a5bcca6c3c2288e344158e326f57e4e6ebd8fb27d654da5c8e69",
+    "sample_rate": 8000,
+    "duration_seconds": 2.64,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony/CLIP_UTT_HI_006_TELEPHONY.wav",
+    "metadata": {
+      "language_group": "HINDI",
+      "category": "self_correction",
+      "intended_amount_inr": 20000,
+      "native_text": "दो हज़ार भेजो, अरे नहीं बीस हज़ार"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HI_006_TELEPHONY_NOISE",
+    "utterance_id": "UTT_HI_006",
+    "condition": "TELEPHONY_NOISE",
+    "sha256_hash": "4e976bff23e3e4f137171a060cbc4fb1e73fb8f8e653af6f71fff2e5f06d54e7",
+    "sample_rate": 8000,
+    "duration_seconds": 2.64,
+    "snr_db": 9.97,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony_noise/CLIP_UTT_HI_006_TELEPHONY_NOISE.wav",
+    "metadata": {
+      "language_group": "HINDI",
+      "category": "self_correction",
+      "intended_amount_inr": 20000,
+      "native_text": "दो हज़ार भेजो, अरे नहीं बीस हज़ार"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_TE_001_CLEAN",
+    "utterance_id": "UTT_TE_001",
+    "condition": "CLEAN",
+    "sha256_hash": "45cbe151d363f6f886f62139d090aa9e176a2d4739d70e3793814f1d96a2168b",
+    "sample_rate": 16000,
+    "duration_seconds": 2.72,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "clean/CLIP_UTT_TE_001_CLEAN.wav",
+    "metadata": {
+      "language_group": "TELUGU",
+      "category": "plain_amount",
+      "intended_amount_inr": 5000,
+      "native_text": "రమేష్ కి ఐదు వేల రూపాయలు పంపించండి"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_TE_001_TELEPHONY",
+    "utterance_id": "UTT_TE_001",
+    "condition": "TELEPHONY",
+    "sha256_hash": "d373939df3b924fbc8ae8b55918fe8cd24ebcbfd4f5f01b7f7bd6c9a6aa6b2f5",
+    "sample_rate": 8000,
+    "duration_seconds": 2.72,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony/CLIP_UTT_TE_001_TELEPHONY.wav",
+    "metadata": {
+      "language_group": "TELUGU",
+      "category": "plain_amount",
+      "intended_amount_inr": 5000,
+      "native_text": "రమేష్ కి ఐదు వేల రూపాయలు పంపించండి"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_TE_001_TELEPHONY_NOISE",
+    "utterance_id": "UTT_TE_001",
+    "condition": "TELEPHONY_NOISE",
+    "sha256_hash": "107204678dd40a2518867b4815387c8816994068048f1f1bf9eba9460c9c1677",
+    "sample_rate": 8000,
+    "duration_seconds": 2.72,
+    "snr_db": 9.98,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony_noise/CLIP_UTT_TE_001_TELEPHONY_NOISE.wav",
+    "metadata": {
+      "language_group": "TELUGU",
+      "category": "plain_amount",
+      "intended_amount_inr": 5000,
+      "native_text": "రమేష్ కి ఐదు వేల రూపాయలు పంపించండి"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_TE_002_CLEAN",
+    "utterance_id": "UTT_TE_002",
+    "condition": "CLEAN",
+    "sha256_hash": "a67e84e3e4e0d58521583eca1c81643960ea8ee5d276e842579dc60c807b0388",
+    "sample_rate": 16000,
+    "duration_seconds": 2.24,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "clean/CLIP_UTT_TE_002_CLEAN.wav",
+    "metadata": {
+      "language_group": "TELUGU",
+      "category": "lakh_crore",
+      "intended_amount_inr": 250000,
+      "native_text": "రెండున్నర లక్షల రూపాయలు పంపు"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_TE_002_TELEPHONY",
+    "utterance_id": "UTT_TE_002",
+    "condition": "TELEPHONY",
+    "sha256_hash": "7b38eb475aac531b0cd398a5aa03ae8c8beb588740849347254e545be84a1bdc",
+    "sample_rate": 8000,
+    "duration_seconds": 2.24,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony/CLIP_UTT_TE_002_TELEPHONY.wav",
+    "metadata": {
+      "language_group": "TELUGU",
+      "category": "lakh_crore",
+      "intended_amount_inr": 250000,
+      "native_text": "రెండున్నర లక్షల రూపాయలు పంపు"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_TE_002_TELEPHONY_NOISE",
+    "utterance_id": "UTT_TE_002",
+    "condition": "TELEPHONY_NOISE",
+    "sha256_hash": "665a033e3fb4c033b019254949174a91af698c0b0c416105ce7e230ecc142aaa",
+    "sample_rate": 8000,
+    "duration_seconds": 2.24,
+    "snr_db": 9.98,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony_noise/CLIP_UTT_TE_002_TELEPHONY_NOISE.wav",
+    "metadata": {
+      "language_group": "TELUGU",
+      "category": "lakh_crore",
+      "intended_amount_inr": 250000,
+      "native_text": "రెండున్నర లక్షల రూపాయలు పంపు"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_TE_003_CLEAN",
+    "utterance_id": "UTT_TE_003",
+    "condition": "CLEAN",
+    "sha256_hash": "84ef78618ca48684b36e22cc6c293d97a01407a0c124032f2ca13d8f456a3040",
+    "sample_rate": 16000,
+    "duration_seconds": 2.56,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "clean/CLIP_UTT_TE_003_CLEAN.wav",
+    "metadata": {
+      "language_group": "TELUGU",
+      "category": "fractional",
+      "intended_amount_inr": 2500,
+      "native_text": "రెండున్నర వేలు ట్రాన్స్‌ఫర్ చేయి"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_TE_003_TELEPHONY",
+    "utterance_id": "UTT_TE_003",
+    "condition": "TELEPHONY",
+    "sha256_hash": "f2b3aece40ddeed4d233c3615ad08aa93d4d2b5db24655ee96599e0da8c3747c",
+    "sample_rate": 8000,
+    "duration_seconds": 2.56,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony/CLIP_UTT_TE_003_TELEPHONY.wav",
+    "metadata": {
+      "language_group": "TELUGU",
+      "category": "fractional",
+      "intended_amount_inr": 2500,
+      "native_text": "రెండున్నర వేలు ట్రాన్స్‌ఫర్ చేయి"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_TE_003_TELEPHONY_NOISE",
+    "utterance_id": "UTT_TE_003",
+    "condition": "TELEPHONY_NOISE",
+    "sha256_hash": "ea7b517c9329614ecc04d2d05e461ff00368deb30a97f4c6ade21e04fad43319",
+    "sample_rate": 8000,
+    "duration_seconds": 2.56,
+    "snr_db": 9.97,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony_noise/CLIP_UTT_TE_003_TELEPHONY_NOISE.wav",
+    "metadata": {
+      "language_group": "TELUGU",
+      "category": "fractional",
+      "intended_amount_inr": 2500,
+      "native_text": "రెండున్నర వేలు ట్రాన్స్‌ఫర్ చేయి"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_TE_004_CLEAN",
+    "utterance_id": "UTT_TE_004",
+    "condition": "CLEAN",
+    "sha256_hash": "bfc90b75de9622e517b7c5906ee86f346242e57b4f6078de183a68c2782f3387",
+    "sample_rate": 16000,
+    "duration_seconds": 2.16,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "clean/CLIP_UTT_TE_004_CLEAN.wav",
+    "metadata": {
+      "language_group": "TELUGU",
+      "category": "confusable",
+      "intended_amount_inr": 15000,
+      "native_text": "పదిహేను వేల రూపాయలు పంపించు"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_TE_004_TELEPHONY",
+    "utterance_id": "UTT_TE_004",
+    "condition": "TELEPHONY",
+    "sha256_hash": "d2bc1bb60c99cf3757d9de015640efb3174f3467d528e73b769bfca3c2c44144",
+    "sample_rate": 8000,
+    "duration_seconds": 2.16,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony/CLIP_UTT_TE_004_TELEPHONY.wav",
+    "metadata": {
+      "language_group": "TELUGU",
+      "category": "confusable",
+      "intended_amount_inr": 15000,
+      "native_text": "పదిహేను వేల రూపాయలు పంపించు"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_TE_004_TELEPHONY_NOISE",
+    "utterance_id": "UTT_TE_004",
+    "condition": "TELEPHONY_NOISE",
+    "sha256_hash": "dec802280169ec41f2305555dd5150ecd97b900ab939796e4beac26b5023e9d0",
+    "sample_rate": 8000,
+    "duration_seconds": 2.16,
+    "snr_db": 9.99,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony_noise/CLIP_UTT_TE_004_TELEPHONY_NOISE.wav",
+    "metadata": {
+      "language_group": "TELUGU",
+      "category": "confusable",
+      "intended_amount_inr": 15000,
+      "native_text": "పదిహేను వేల రూపాయలు పంపించు"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_TE_005_CLEAN",
+    "utterance_id": "UTT_TE_005",
+    "condition": "CLEAN",
+    "sha256_hash": "0a8cdbbf86e2ad7a76c1e58dd941625a7dc5fc458f865b250b11ee8c4a7ab371",
+    "sample_rate": 16000,
+    "duration_seconds": 2.88,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "clean/CLIP_UTT_TE_005_CLEAN.wav",
+    "metadata": {
+      "language_group": "TELUGU",
+      "category": "codemix",
+      "intended_amount_inr": 50000,
+      "native_text": "యాభై వేలు account lo transfer cheyyi"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_TE_005_TELEPHONY",
+    "utterance_id": "UTT_TE_005",
+    "condition": "TELEPHONY",
+    "sha256_hash": "3505f494539e2d5cca64c7ced649e7c8e4374d69437c1efe5c4312586a5523ed",
+    "sample_rate": 8000,
+    "duration_seconds": 2.88,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony/CLIP_UTT_TE_005_TELEPHONY.wav",
+    "metadata": {
+      "language_group": "TELUGU",
+      "category": "codemix",
+      "intended_amount_inr": 50000,
+      "native_text": "యాభై వేలు account lo transfer cheyyi"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_TE_005_TELEPHONY_NOISE",
+    "utterance_id": "UTT_TE_005",
+    "condition": "TELEPHONY_NOISE",
+    "sha256_hash": "15884e62d1c912b6899690c6279802f3b9f24426c852c29938b63f197e0df6af",
+    "sample_rate": 8000,
+    "duration_seconds": 2.88,
+    "snr_db": 9.98,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony_noise/CLIP_UTT_TE_005_TELEPHONY_NOISE.wav",
+    "metadata": {
+      "language_group": "TELUGU",
+      "category": "codemix",
+      "intended_amount_inr": 50000,
+      "native_text": "యాభై వేలు account lo transfer cheyyi"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_TE_006_CLEAN",
+    "utterance_id": "UTT_TE_006",
+    "condition": "CLEAN",
+    "sha256_hash": "45cbe151d363f6f886f62139d090aa9e176a2d4739d70e3793814f1d96a2168b",
+    "sample_rate": 16000,
+    "duration_seconds": 2.72,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "clean/CLIP_UTT_TE_006_CLEAN.wav",
+    "metadata": {
+      "language_group": "TELUGU",
+      "category": "self_correction",
+      "intended_amount_inr": 5000,
+      "native_text": "ఐదు వందలు పంపు, కాదు కాదు ఐదు వేలు"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_TE_006_TELEPHONY",
+    "utterance_id": "UTT_TE_006",
+    "condition": "TELEPHONY",
+    "sha256_hash": "d373939df3b924fbc8ae8b55918fe8cd24ebcbfd4f5f01b7f7bd6c9a6aa6b2f5",
+    "sample_rate": 8000,
+    "duration_seconds": 2.72,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony/CLIP_UTT_TE_006_TELEPHONY.wav",
+    "metadata": {
+      "language_group": "TELUGU",
+      "category": "self_correction",
+      "intended_amount_inr": 5000,
+      "native_text": "ఐదు వందలు పంపు, కాదు కాదు ఐదు వేలు"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_TE_006_TELEPHONY_NOISE",
+    "utterance_id": "UTT_TE_006",
+    "condition": "TELEPHONY_NOISE",
+    "sha256_hash": "107204678dd40a2518867b4815387c8816994068048f1f1bf9eba9460c9c1677",
+    "sample_rate": 8000,
+    "duration_seconds": 2.72,
+    "snr_db": 9.98,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony_noise/CLIP_UTT_TE_006_TELEPHONY_NOISE.wav",
+    "metadata": {
+      "language_group": "TELUGU",
+      "category": "self_correction",
+      "intended_amount_inr": 5000,
+      "native_text": "ఐదు వందలు పంపు, కాదు కాదు ఐదు వేలు"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HG_001_CLEAN",
+    "utterance_id": "UTT_HG_001",
+    "condition": "CLEAN",
+    "sha256_hash": "a58309cd1f81705cc6a38a3661c6412eae40a2fa323f31a45da5d1fb2cbebd00",
+    "sample_rate": 16000,
+    "duration_seconds": 1.92,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "clean/CLIP_UTT_HG_001_CLEAN.wav",
+    "metadata": {
+      "language_group": "HINGLISH",
+      "category": "plain_amount",
+      "intended_amount_inr": 5000,
+      "native_text": "Transfer 5000 to brother"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HG_001_TELEPHONY",
+    "utterance_id": "UTT_HG_001",
+    "condition": "TELEPHONY",
+    "sha256_hash": "3c746b7df5b8f8604a2e5f59b6b16d147e5239f2dfbd7653568e74daa3a52dfb",
+    "sample_rate": 8000,
+    "duration_seconds": 1.92,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony/CLIP_UTT_HG_001_TELEPHONY.wav",
+    "metadata": {
+      "language_group": "HINGLISH",
+      "category": "plain_amount",
+      "intended_amount_inr": 5000,
+      "native_text": "Transfer 5000 to brother"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HG_001_TELEPHONY_NOISE",
+    "utterance_id": "UTT_HG_001",
+    "condition": "TELEPHONY_NOISE",
+    "sha256_hash": "2bb760f83ced7603e86a4addb730ecc11be1a3cfba2e26103796704cf36eca3d",
+    "sample_rate": 8000,
+    "duration_seconds": 1.92,
+    "snr_db": 9.98,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony_noise/CLIP_UTT_HG_001_TELEPHONY_NOISE.wav",
+    "metadata": {
+      "language_group": "HINGLISH",
+      "category": "plain_amount",
+      "intended_amount_inr": 5000,
+      "native_text": "Transfer 5000 to brother"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HG_002_CLEAN",
+    "utterance_id": "UTT_HG_002",
+    "condition": "CLEAN",
+    "sha256_hash": "90ee9ed94d507e141d8aeb9b35fa3d4ba07f8bf1589829c6446ab4cf25bd530a",
+    "sample_rate": 16000,
+    "duration_seconds": 2.8,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "clean/CLIP_UTT_HG_002_CLEAN.wav",
+    "metadata": {
+      "language_group": "HINGLISH",
+      "category": "lakh_crore",
+      "intended_amount_inr": 250000,
+      "native_text": "Account me 2.5 lakh transfer kar do"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HG_002_TELEPHONY",
+    "utterance_id": "UTT_HG_002",
+    "condition": "TELEPHONY",
+    "sha256_hash": "c752def7ed567508d1901319658906523aa1959356e429505cae16ea0f606111",
+    "sample_rate": 8000,
+    "duration_seconds": 2.8,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony/CLIP_UTT_HG_002_TELEPHONY.wav",
+    "metadata": {
+      "language_group": "HINGLISH",
+      "category": "lakh_crore",
+      "intended_amount_inr": 250000,
+      "native_text": "Account me 2.5 lakh transfer kar do"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HG_002_TELEPHONY_NOISE",
+    "utterance_id": "UTT_HG_002",
+    "condition": "TELEPHONY_NOISE",
+    "sha256_hash": "efe1a944eba43a113c15c927710493a2ef2316261c52ed66c759d836baf429ed",
+    "sample_rate": 8000,
+    "duration_seconds": 2.8,
+    "snr_db": 9.99,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony_noise/CLIP_UTT_HG_002_TELEPHONY_NOISE.wav",
+    "metadata": {
+      "language_group": "HINGLISH",
+      "category": "lakh_crore",
+      "intended_amount_inr": 250000,
+      "native_text": "Account me 2.5 lakh transfer kar do"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HG_003_CLEAN",
+    "utterance_id": "UTT_HG_003",
+    "condition": "CLEAN",
+    "sha256_hash": "bfc90b75de9622e517b7c5906ee86f346242e57b4f6078de183a68c2782f3387",
+    "sample_rate": 16000,
+    "duration_seconds": 2.16,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "clean/CLIP_UTT_HG_003_CLEAN.wav",
+    "metadata": {
+      "language_group": "HINGLISH",
+      "category": "fractional",
+      "intended_amount_inr": 2500,
+      "native_text": "Dhai hazar rupaye send karo"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HG_003_TELEPHONY",
+    "utterance_id": "UTT_HG_003",
+    "condition": "TELEPHONY",
+    "sha256_hash": "d2bc1bb60c99cf3757d9de015640efb3174f3467d528e73b769bfca3c2c44144",
+    "sample_rate": 8000,
+    "duration_seconds": 2.16,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony/CLIP_UTT_HG_003_TELEPHONY.wav",
+    "metadata": {
+      "language_group": "HINGLISH",
+      "category": "fractional",
+      "intended_amount_inr": 2500,
+      "native_text": "Dhai hazar rupaye send karo"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HG_003_TELEPHONY_NOISE",
+    "utterance_id": "UTT_HG_003",
+    "condition": "TELEPHONY_NOISE",
+    "sha256_hash": "dec802280169ec41f2305555dd5150ecd97b900ab939796e4beac26b5023e9d0",
+    "sample_rate": 8000,
+    "duration_seconds": 2.16,
+    "snr_db": 9.99,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony_noise/CLIP_UTT_HG_003_TELEPHONY_NOISE.wav",
+    "metadata": {
+      "language_group": "HINGLISH",
+      "category": "fractional",
+      "intended_amount_inr": 2500,
+      "native_text": "Dhai hazar rupaye send karo"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HG_004_CLEAN",
+    "utterance_id": "UTT_HG_004",
+    "condition": "CLEAN",
+    "sha256_hash": "c0bc760a914dd1a04a9166355d7f00363ab560daca05f049358e8761e30090aa",
+    "sample_rate": 16000,
+    "duration_seconds": 1.44,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "clean/CLIP_UTT_HG_004_CLEAN.wav",
+    "metadata": {
+      "language_group": "HINGLISH",
+      "category": "confusable",
+      "intended_amount_inr": 70000,
+      "native_text": "Sattar hazar bhejo"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HG_004_TELEPHONY",
+    "utterance_id": "UTT_HG_004",
+    "condition": "TELEPHONY",
+    "sha256_hash": "e235ec3ee421322de42da2a4d1a0dde91a30536757a910936c479a00409ab9a3",
+    "sample_rate": 8000,
+    "duration_seconds": 1.44,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony/CLIP_UTT_HG_004_TELEPHONY.wav",
+    "metadata": {
+      "language_group": "HINGLISH",
+      "category": "confusable",
+      "intended_amount_inr": 70000,
+      "native_text": "Sattar hazar bhejo"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HG_004_TELEPHONY_NOISE",
+    "utterance_id": "UTT_HG_004",
+    "condition": "TELEPHONY_NOISE",
+    "sha256_hash": "94b98d19e26fe0211c8f9b42435be61ef1473acf90b60e6c4743e83fe77037ca",
+    "sample_rate": 8000,
+    "duration_seconds": 1.44,
+    "snr_db": 10.0,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony_noise/CLIP_UTT_HG_004_TELEPHONY_NOISE.wav",
+    "metadata": {
+      "language_group": "HINGLISH",
+      "category": "confusable",
+      "intended_amount_inr": 70000,
+      "native_text": "Sattar hazar bhejo"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HG_005_CLEAN",
+    "utterance_id": "UTT_HG_005",
+    "condition": "CLEAN",
+    "sha256_hash": "93f6d4992ce08b41f0fe7a03c728bdea402cd659ca66a624b310ddaf63baec24",
+    "sample_rate": 16000,
+    "duration_seconds": 2.96,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "clean/CLIP_UTT_HG_005_CLEAN.wav",
+    "metadata": {
+      "language_group": "HINGLISH",
+      "category": "codemix",
+      "intended_amount_inr": 250000,
+      "native_text": "Please pay do lakh पचास हज़ार via UPI"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HG_005_TELEPHONY",
+    "utterance_id": "UTT_HG_005",
+    "condition": "TELEPHONY",
+    "sha256_hash": "21e51075d4cfc0cc6603918d9eaead0058f24d80296cdf266e56e9ae32446841",
+    "sample_rate": 8000,
+    "duration_seconds": 2.96,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony/CLIP_UTT_HG_005_TELEPHONY.wav",
+    "metadata": {
+      "language_group": "HINGLISH",
+      "category": "codemix",
+      "intended_amount_inr": 250000,
+      "native_text": "Please pay do lakh पचास हज़ार via UPI"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HG_005_TELEPHONY_NOISE",
+    "utterance_id": "UTT_HG_005",
+    "condition": "TELEPHONY_NOISE",
+    "sha256_hash": "286fa71c69700db96cda4d7f937615af31e4fd55e143cfd9335fb83b5320abcd",
+    "sample_rate": 8000,
+    "duration_seconds": 2.96,
+    "snr_db": 9.99,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony_noise/CLIP_UTT_HG_005_TELEPHONY_NOISE.wav",
+    "metadata": {
+      "language_group": "HINGLISH",
+      "category": "codemix",
+      "intended_amount_inr": 250000,
+      "native_text": "Please pay do lakh पचास हज़ार via UPI"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HG_006_CLEAN",
+    "utterance_id": "UTT_HG_006",
+    "condition": "CLEAN",
+    "sha256_hash": "45cbe151d363f6f886f62139d090aa9e176a2d4739d70e3793814f1d96a2168b",
+    "sample_rate": 16000,
+    "duration_seconds": 2.72,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "clean/CLIP_UTT_HG_006_CLEAN.wav",
+    "metadata": {
+      "language_group": "HINGLISH",
+      "category": "self_correction",
+      "intended_amount_inr": 20000,
+      "native_text": "Transfer 2000 nahi nahi 20000 karo"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HG_006_TELEPHONY",
+    "utterance_id": "UTT_HG_006",
+    "condition": "TELEPHONY",
+    "sha256_hash": "d373939df3b924fbc8ae8b55918fe8cd24ebcbfd4f5f01b7f7bd6c9a6aa6b2f5",
+    "sample_rate": 8000,
+    "duration_seconds": 2.72,
+    "snr_db": null,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony/CLIP_UTT_HG_006_TELEPHONY.wav",
+    "metadata": {
+      "language_group": "HINGLISH",
+      "category": "self_correction",
+      "intended_amount_inr": 20000,
+      "native_text": "Transfer 2000 nahi nahi 20000 karo"
+    }
+  },
+  {
+    "clip_id": "CLIP_UTT_HG_006_TELEPHONY_NOISE",
+    "utterance_id": "UTT_HG_006",
+    "condition": "TELEPHONY_NOISE",
+    "sha256_hash": "107204678dd40a2518867b4815387c8816994068048f1f1bf9eba9460c9c1677",
+    "sample_rate": 8000,
+    "duration_seconds": 2.72,
+    "snr_db": 9.98,
+    "provider": "mock_indic_parler",
+    "model": "bulbul:v4-flash",
+    "relative_filepath": "telephony_noise/CLIP_UTT_HG_006_TELEPHONY_NOISE.wav",
+    "metadata": {
+      "language_group": "HINGLISH",
+      "category": "self_correction",
+      "intended_amount_inr": 20000,
+      "native_text": "Transfer 2000 nahi nahi 20000 karo"
+    }
+  }
+]

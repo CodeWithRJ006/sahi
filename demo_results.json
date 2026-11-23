@@ -1,0 +1,37 @@
+[
+  {
+    "scenario": "A_SUCCESS",
+    "utterance": "₹2500 भेजो",
+    "intended_amount": 2500,
+    "parsed_amount": 2500,
+    "llm_proposal": 2500,
+    "guard_decision": "EXECUTE",
+    "reason_code": "AGREEMENT_VERIFIED",
+    "ledger": [
+      {
+        "amount": 2500,
+        "utterance": "₹2500 भेजो"
+      }
+    ]
+  },
+  {
+    "scenario": "B_WRONG_AMOUNT",
+    "utterance": "₹5000 పంపించు",
+    "intended_amount": 5000,
+    "parsed_amount": 5000,
+    "llm_proposal": 50000,
+    "guard_decision": "ESCALATE",
+    "reason_code": "POWER_OF_TEN_MISMATCH",
+    "ledger": []
+  },
+  {
+    "scenario": "C_AMBIGUOUS",
+    "utterance": "send 500 no wait 5000",
+    "intended_amount": 0,
+    "parsed_amount": null,
+    "llm_proposal": null,
+    "guard_decision": "RE_ASK",
+    "reason_code": "PARSE_AMBIGUOUS_SELF_CORRECTION",
+    "ledger": []
+  }
+]

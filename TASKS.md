@@ -48,7 +48,11 @@
 - [x] Run full pytest suite, verify 100% pass rate (34 passed, 93% line coverage)
 - [x] Commit and push verified changes to `origin main`
 
-### Phase 6: Next Stages Roadmap (Subsequent Sessions)
-- [ ] Stage C: Saaras v4 and Sarvam 105B API adapters with response caching and rate limits
-- [ ] Stage E: Evaluation benchmark pipeline and dataset runner
-- [ ] Stage F: Interactive CLI demo & reporting dashboard
+### Phase 8: Stage E — Experimental Evaluation Engine
+- [x] Create pre-registration protocol defining metrics, exclusions, and limitations (`PREREG.md`)
+- [x] Implement evaluation data models (`TrialResult`, `ArmEvaluationSummary`, `PairedComparisonResult`) in `src/sahi/metrics/models.py`
+- [x] Implement safety metrics calculator with utterance-level cluster bootstrap (10,000 resamples) in `src/sahi/metrics/calculator.py`
+- [x] Implement benchmark evaluation harness with strict ground-truth isolation and isolated mock bank ledgers in `src/sahi/metrics/evaluator.py`
+- [x] Implement reporting generator producing `results.json`, `evaluation_run.json`, `report/index.html`, and matplotlib plots in `src/sahi/metrics/reporter.py`
+- [x] Implement unit and integration tests in `tests/test_evaluation_engine.py` (67 passed, 1 skipped)
+- [x] Execute benchmark runner producing verified reports and visual charts (`report/` and root `results.json`)

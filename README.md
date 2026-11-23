@@ -56,7 +56,37 @@ Spoken Audio / Transcript
 
 ---
 
-## Quickstart
+## WINDOWS COMMANDS
+
+### Environment setup
+- Install Python 3.11+ from the official installer.
+- Ensure `pip` is on your `PATH`.
+- Run `pip install -e .` from the repository root.
+
+### Import verification
+```powershell
+python -c "import sahi; print('sahi import OK')"
+```
+
+### Full tests
+```powershell
+pytest -v
+```
+
+### Local demo
+```powershell
+python -m sahi.demo   # runs a dry‑run of the pilot locally
+```
+
+### Pilot dry‑run
+```powershell
+python -m sahi.scripts.run_live_pilot --plan data\live_pilot_8.yaml
+```
+
+### Pilot help
+```powershell
+python -m sahi.scripts.run_live_pilot -h
+```
 
 ### 1. Installation
 Clone repository and install dependencies:
