@@ -10,7 +10,7 @@ readme = "README.md"
 authors = [
     { name = "CodeWithRJ006", email = "bokinalarj@gmail.com" }
 ]
-license = { text = "Apache-2.0" }
+license = "Apache-2.0"
 requires-python = ">=3.11"
 dependencies = [
     "fastapi>=0.110.0",
