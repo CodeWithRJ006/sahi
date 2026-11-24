@@ -64,22 +64,7 @@ EXPECTED_TOTAL_REQUESTS = (
     EXPECTED_TTS_CALLS + EXPECTED_STT_TRANSCRIBE + EXPECTED_STT_CODEMIX + EXPECTED_LLM_CALLS
 )  # 8 + 24 + 24 + 24 = 80
 
-# Cost assumptions (INR) – Option C totals for the entire pilot
-TOTAL_TTS_COST                = 0.24   # ₹0.24 total for all TTS calls
-TOTAL_STT_TRANSCRIBE_COST     = 0.98   # ₹0.98 total for all transcribe calls
-TOTAL_STT_CODEMIX_COST        = 0.98   # ₹0.98 total for all codemix calls
-TOTAL_LLM_INPUT_COST          = 0.72   # ₹0.72 total for LLM input tokens
-TOTAL_LLM_OUTPUT_COST         = 0.288  # ₹0.288 total for LLM output tokens
-BUDGET_BUFFER_FRACTION        = 0.30   # 30 % safety buffer
-
-# Option C – full‑pilot accounting (as per final decision)
-TTS_COST_PER_UTTERANCE   = 0.24   # ₹0.24 per TTS request (fixed)
-STT_COST_PER_CALL        = 0.98   # ₹0.98 per STT request (2 min × ₹0.49/min)
-LLM_INPUT_TOKENS_TOTAL   = 48_000  # total input tokens for the pilot
-LLM_OUTPUT_TOKENS_TOTAL  = 4_800   # total output tokens for the pilot
-LLM_COST_PER_1M_INPUT    = 15.0    # ₹15 per 1 M input tokens
-LLM_COST_PER_1M_OUTPUT   = 60.0    # ₹60 per 1 M output tokens
-BUDGET_BUFFER_FRACTION   = 0.30    # 30 % safety buffer
+# Cost assumptions (INR)
 TTS_COST_PER_1000_CHARS    = 1.00   # Rs.1 / 1,000 chars — from SarvamBulbulProvider
 STT_COST_PER_MIN           = 0.75   # Rs.0.75 / minute of audio
 LLM_INPUT_TOKENS_PER_CALL  = 400    # conservative estimate
@@ -136,43 +121,12 @@ def validate_gates(records: list[dict[str, Any]], live: bool) -> list[str]:
             errors.append("SARVAM_API_KEY is not set. Live execution requires a valid key.")
 
     return errors
-    """Return list of blocking error messages; empty → all gates pass."""
-    errors: list[str] = []
-
-    if len(records) < UTTERANCES_REQUIRED:
-        errors.append(
-            f"Only {len(records)} utterances found; {UTTERANCES_REQUIRED} required."
-        )
-
-    for rec in records:
-        uid = rec.get("id", "<unknown>")
-        speaker = rec.get("proposed_speaker", "")
-        status  = rec.get("verification_status", "")
-
-        if speaker not in VALID_SPEAKER_IDS:
-            errors.append(
-                f"{uid}: proposed_speaker '{speaker}' is not a known Bulbul catalogue ID."
-            )
-        if status != "VERIFIED":
-            errors.append(
-                f"{uid}: verification_status is '{status}'; must be VERIFIED before live execution."
-            )
-
-    if live:
-        api_key = os.environ.get("SARVAM_API_KEY", "")
-        if not api_key:
-            errors.append("SARVAM_API_KEY is not set. Live execution requires a valid key.")
-
-    return errors
 
 
 def compute_plan(records: list[dict[str, Any]]) -> dict[str, Any]:
-    """Compute the full request plan without making any network calls.
-    Uses the detailed cost model based on characters and audio duration.
-    """
+    """Compute the full request plan without making any network calls."""
     n = len(records)
 
-    # Simple counts
     total_chars = sum(len(r.get("utterance_native", "")) for r in records)
     tts_calls = n
     stt_transcribe = n * AUDIO_VARIANTS_PER_UTTERANCE
@@ -183,7 +137,7 @@ def compute_plan(records: list[dict[str, Any]]) -> dict[str, Any]:
     total_requests = tts_calls + stt_transcribe + stt_codemix + llm_calls
     total_audio_min = (n * AVG_AUDIO_DURATION_SEC * AUDIO_VARIANTS_PER_UTTERANCE) / 60.0
 
-    # Cost calculations using per‑char and per‑minute rates
+    # Cost calculations
     tts_cost = (total_chars / 1000.0) * TTS_COST_PER_1000_CHARS
     stt_cost = total_audio_min * STT_COST_PER_MIN
     llm_input_cost = (llm_calls * LLM_INPUT_TOKENS_PER_CALL / 1_000_000) * LLM_COST_PER_1M_INPUT
@@ -212,93 +166,6 @@ def compute_plan(records: list[dict[str, Any]]) -> dict[str, Any]:
         "total_est_inr": round(total_est, 4),
         "llm_input_tokens": llm_calls * LLM_INPUT_TOKENS_PER_CALL,
         "llm_output_tokens": llm_calls * LLM_OUTPUT_TOKENS_PER_CALL,
-    }
-    """Compute the full request plan without making any network calls.
-    Uses the final Option C cost model.
-    """
-    n = len(records)
-
-    # Simple counts
-    total_chars = sum(len(r.get("utterance_native", "")) for r in records)
-    tts_calls      = n
-    stt_calls      = n * AUDIO_VARIANTS_PER_UTTERANCE * len(STT_MODES)   # transcribe + codemix per variant
-    llm_calls      = n * LLM_CALLS_PER_UTTERANCE
-    total_requests = tts_calls + stt_calls + llm_calls
-    total_audio_min = (n * AVG_AUDIO_DURATION_SEC * AUDIO_VARIANTS_PER_UTTERANCE) / 60.0
-
-    # Cost calculations – Option C totals for the entire pilot
-    tts_cost   = TOTAL_TTS_COST
-    stt_cost   = TOTAL_STT_TRANSCRIBE_COST + TOTAL_STT_CODEMIX_COST
-    llm_cost   = TOTAL_LLM_INPUT_COST + TOTAL_LLM_OUTPUT_COST
-    base_cost  = tts_cost + stt_cost + llm_cost
-    buffer     = base_cost * BUDGET_BUFFER_FRACTION
-    total_est  = base_cost + buffer
-
-
-    return {
-        "utterances":         n,
-        "tts_calls":          tts_calls,
-        "stt_transcribe":     n * AUDIO_VARIANTS_PER_UTTERANCE,
-        "stt_codemix":        n * AUDIO_VARIANTS_PER_UTTERANCE,
-        "llm_calls":          llm_calls,
-        "total_requests":     total_requests,
-        "local_xforms":       n * LOCAL_DEGRADATIONS_PER_UTTERANCE,
-        "audio_outputs":      n * AUDIO_VARIANTS_PER_UTTERANCE,
-        "total_chars":        total_chars,
-        "total_audio_min":    round(total_audio_min, 3),
-        "tts_cost_inr":       round(tts_cost, 4),
-        "stt_cost_inr":       round(stt_cost, 4),
-        "llm_cost_inr":       round(llm_cost, 4),
-        "base_cost_inr":      round(base_cost, 4),
-        "buffer_inr":         round(buffer, 4),
-        "total_est_inr":      round(total_est, 4),
-        "llm_input_tokens":   LLM_INPUT_TOKENS_TOTAL,
-        "llm_output_tokens":  LLM_OUTPUT_TOKENS_TOTAL,
-    }
-    """Compute the full request plan without making any network calls."""
-    n = len(records)
-
-    # TTS character count estimate
-    total_chars = sum(len(r.get("utterance_native", "")) for r in records)
-
-    tts_calls         = n
-    stt_transcribe    = n * AUDIO_VARIANTS_PER_UTTERANCE
-    stt_codemix       = n * AUDIO_VARIANTS_PER_UTTERANCE
-    llm_calls         = n * LLM_CALLS_PER_UTTERANCE
-    local_xforms      = n * LOCAL_DEGRADATIONS_PER_UTTERANCE
-    audio_outputs     = n * AUDIO_VARIANTS_PER_UTTERANCE
-    total_requests    = tts_calls + stt_transcribe + stt_codemix + llm_calls
-    total_audio_min   = (n * AVG_AUDIO_DURATION_SEC * AUDIO_VARIANTS_PER_UTTERANCE) / 60.0
-
-    # Costs
-    tts_cost  = (total_chars / 1000.0) * TTS_COST_PER_1000_CHARS
-    stt_cost  = total_audio_min * STT_COST_PER_MIN
-    llm_input_cost  = (llm_calls * LLM_INPUT_TOKENS_PER_CALL / 1_000_000) * LLM_COST_PER_1M_INPUT
-    llm_output_cost = (llm_calls * LLM_OUTPUT_TOKENS_PER_CALL / 1_000_000) * LLM_COST_PER_1M_OUTPUT
-    llm_cost  = llm_input_cost + llm_output_cost
-    base_cost = tts_cost + stt_cost + llm_cost
-    buffer    = base_cost * BUDGET_BUFFER_FRACTION
-    total_est = base_cost + buffer
-
-    return {
-        "utterances":         n,
-        "tts_calls":          tts_calls,
-        "stt_transcribe":     stt_transcribe,
-        "stt_codemix":        stt_codemix,
-        "llm_calls":          llm_calls,
-        "total_requests":     total_requests,
-        "local_xforms":       local_xforms,
-        "audio_outputs":      audio_outputs,
-        "total_chars":        total_chars,
-        "total_audio_min":    round(total_audio_min, 3),
-        "llm_input_tokens":   llm_calls * LLM_INPUT_TOKENS_PER_CALL,
-        "llm_output_tokens":  llm_calls * LLM_OUTPUT_TOKENS_PER_CALL,
-        "tts_cost_inr":       round(tts_cost, 4),
-        "stt_cost_inr":       round(stt_cost, 4),
-        "llm_cost_inr":       round(llm_cost, 4),
-        "base_cost_inr":      round(base_cost, 4),
-        "buffer_inr":         round(buffer, 4),
-        "total_est_inr":      round(total_est, 4),
     }
 
 

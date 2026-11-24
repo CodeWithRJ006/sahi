@@ -3,9 +3,9 @@
 import re
 from typing import Optional
 from sahi.amounts.constants import (
-    HINDI_SCALES, HINDI_DEVANAGARI, HINDI_LATIN, COLLOQUIAL_FRACTIONS_HINDI
+    HINDI_SCALES, HINDI_DEVANAGARI, HINDI_LATIN, COLLOQUIAL_FRACTIONS_HINDI, MAX_AMOUNT_INR
 )
-from sahi.amounts.models import ParsedAmount, ParseStatus, LanguageGroup
+from sahi.amounts.models import ParsedAmount, ParseStatus, AmbiguityReason, LanguageGroup
 from sahi.amounts.normalizer import clean_text, strip_currency_tokens
 
 def parse_hindi_amount(text: str) -> Optional[ParsedAmount]:
@@ -24,6 +24,17 @@ def parse_hindi_amount(text: str) -> Optional[ParsedAmount]:
         mult = HINDI_SCALES.get(scale_word)
         if base and mult:
             total = int((base + 0.5) * mult)
+            if total > MAX_AMOUNT_INR:
+                return ParsedAmount(
+                    raw_text=text,
+                    status=ParseStatus.AMBIGUOUS,
+                    ambiguity_reason=AmbiguityReason.OUT_OF_BOUNDS,
+                    candidates=[total],
+                    confidence=0.5,
+                    language_detected=LanguageGroup.HINDI,
+                    tokens_parsed=tokens,
+                    metadata={"pattern": "exceeds_maximum_threshold", "amount": total}
+                )
             return ParsedAmount(
                 raw_text=text,
                 status=ParseStatus.PARSED,
@@ -42,6 +53,17 @@ def parse_hindi_amount(text: str) -> Optional[ParsedAmount]:
             scale_word = match.group(1)
             mult = HINDI_SCALES.get(scale_word, 1000)
             total = int(factor * mult)
+            if total > MAX_AMOUNT_INR:
+                return ParsedAmount(
+                    raw_text=text,
+                    status=ParseStatus.AMBIGUOUS,
+                    ambiguity_reason=AmbiguityReason.OUT_OF_BOUNDS,
+                    candidates=[total],
+                    confidence=0.5,
+                    language_detected=LanguageGroup.HINDI,
+                    tokens_parsed=tokens,
+                    metadata={"pattern": "exceeds_maximum_threshold", "amount": total}
+                )
             return ParsedAmount(
                 raw_text=text,
                 status=ParseStatus.PARSED,
@@ -60,6 +82,17 @@ def parse_hindi_amount(text: str) -> Optional[ParsedAmount]:
             val = float(num_str)
             mult = HINDI_SCALES.get(scale_word, 1)
             total = int(round(val * mult))
+            if total > MAX_AMOUNT_INR:
+                return ParsedAmount(
+                    raw_text=text,
+                    status=ParseStatus.AMBIGUOUS,
+                    ambiguity_reason=AmbiguityReason.OUT_OF_BOUNDS,
+                    candidates=[total],
+                    confidence=0.5,
+                    language_detected=LanguageGroup.HINDI,
+                    tokens_parsed=tokens,
+                    metadata={"pattern": "exceeds_maximum_threshold", "amount": total}
+                )
             return ParsedAmount(
                 raw_text=text,
                 status=ParseStatus.PARSED,
@@ -116,6 +149,17 @@ def parse_hindi_amount(text: str) -> Optional[ParsedAmount]:
     )
 
     if has_hindi_unit and total > 0 and is_valid_extraction:
+        if total > MAX_AMOUNT_INR:
+            return ParsedAmount(
+                raw_text=text,
+                status=ParseStatus.AMBIGUOUS,
+                ambiguity_reason=AmbiguityReason.OUT_OF_BOUNDS,
+                candidates=[total],
+                confidence=0.5,
+                language_detected=LanguageGroup.HINDI,
+                tokens_parsed=tokens,
+                metadata={"pattern": "exceeds_maximum_threshold", "amount": total}
+            )
         return ParsedAmount(
             raw_text=text,
             status=ParseStatus.PARSED,

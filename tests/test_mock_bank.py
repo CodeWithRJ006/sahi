@@ -113,3 +113,87 @@ def test_transactions_audit_log(client):
     assert latest["amount_inr"] == 1200
     assert latest["to_payee"] == "ramesh@upi"
     assert latest["guard_decision"]["action"] == "EXECUTE"
+
+def test_direct_database_boundary_rejections(test_db):
+    from sahi.bank.models import TransferRequest
+    import pytest
+    from pydantic import ValidationError
+
+    # Pydantic validation rejects negative or zero amount at model layer
+    with pytest.raises(ValidationError):
+        TransferRequest(
+            from_account="ACC_USER_001",
+            to_payee="ramesh@upi",
+            amount_inr=-500,
+            idempotency_key="IDEMP_NEG_01"
+        )
+
+    with pytest.raises(ValidationError):
+        TransferRequest(
+            from_account="ACC_USER_001",
+            to_payee="ramesh@upi",
+            amount_inr=0,
+            idempotency_key="IDEMP_ZERO_01"
+        )
+
+    # If validation is bypassed via model_construct, database boundary still rejects it
+    req_bypassed = TransferRequest.model_construct(
+        from_account="ACC_USER_001",
+        to_payee="ramesh@upi",
+        amount_inr=-500,
+        idempotency_key="IDEMP_BYPASS_01"
+    )
+    res_bypassed = test_db.execute_transfer(req_bypassed)
+    assert res_bypassed.success is False
+    assert res_bypassed.status == "REJECTED"
+
+    # Exceeding ceiling limit (100,000,000)
+    req_large = TransferRequest(
+        from_account="ACC_USER_001",
+        to_payee="ramesh@upi",
+        amount_inr=100_000_001,
+        idempotency_key="IDEMP_LARGE_01"
+    )
+    res_large = test_db.execute_transfer(req_large)
+    assert res_large.success is False
+    assert res_large.status == "REJECTED"
+
+    # Empty payee
+    req_nopayee = TransferRequest.model_construct(
+        from_account="ACC_USER_001",
+        to_payee="",
+        amount_inr=1000,
+        idempotency_key="IDEMP_NOPAYEE_01"
+    )
+    res_nopayee = test_db.execute_transfer(req_nopayee)
+    assert res_nopayee.success is False
+    assert res_nopayee.status == "REJECTED"
+
+def test_concurrent_transfers_consistency(test_db):
+    import concurrent.futures
+    from sahi.bank.models import TransferRequest
+
+    initial_acc = test_db.get_account("ACC_USER_001")
+    initial_balance = initial_acc.balance_inr
+    transfer_amount = 1000
+    num_threads = 10
+
+    def make_transfer(idx):
+        req = TransferRequest(
+            from_account="ACC_USER_001",
+            to_payee=f"user_{idx}@upi",
+            amount_inr=transfer_amount,
+            idempotency_key=f"CONCURRENT_TX_{idx}"
+        )
+        return test_db.execute_transfer(req)
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=num_threads) as executor:
+        results = list(executor.map(make_transfer, range(num_threads)))
+
+    for r in results:
+        assert r.success is True
+        assert r.status == "SUCCESS"
+
+    final_acc = test_db.get_account("ACC_USER_001")
+    expected_balance = initial_balance - (transfer_amount * num_threads)
+    assert final_acc.balance_inr == expected_balance

@@ -137,22 +137,29 @@ class SahiPipeline:
                 source_name="saaras_literal",
                 amount_inr=parsed_literal.amount_inr,
                 raw_text=stt_literal.transcript,
-                confidence=parsed_literal.confidence
+                confidence=parsed_literal.confidence,
+                is_proposal=False,
+                status=parsed_literal.status.name,
+                candidates=parsed_literal.candidates
             ),
             ReadingSource(
                 source_name="saaras_codemix",
                 amount_inr=parsed_codemix.amount_inr,
                 raw_text=stt_codemix.transcript,
-                confidence=parsed_codemix.confidence
+                confidence=parsed_codemix.confidence,
+                is_proposal=False,
+                status=parsed_codemix.status.name,
+                candidates=parsed_codemix.candidates
             )
         ]
-        if llm_proposal:
+        if llm_proposal and llm_proposal.amount_inr is not None:
             readings.append(
                 ReadingSource(
                     source_name="sarvam_105b_proposal",
                     amount_inr=llm_proposal.amount_inr,
                     raw_text=str(llm_proposal.raw_arguments),
-                    confidence=1.0
+                    confidence=1.0,
+                    is_proposal=True
                 )
             )
 

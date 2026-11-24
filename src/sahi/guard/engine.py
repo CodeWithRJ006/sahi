@@ -57,8 +57,52 @@ class SahiGuard:
                     readings=readings
                 )
 
+        # Check if any reading explicitly reports an ambiguous parse status
+        ambiguous_readings = [r for r in readings if r.status == "AMBIGUOUS" or len(r.candidates) > 0]
+        if ambiguous_readings:
+            all_candidates = []
+            for ar in ambiguous_readings:
+                all_candidates.extend(ar.candidates)
+            unique_cands = sorted(list(set(all_candidates)))
+            return GuardDecision(
+                action=GuardAction.RE_ASK,
+                reason_code=ReasonCode.PARSE_AMBIGUOUS_SELF_CORRECTION if len(unique_cands) > 1 else ReasonCode.PARSE_AMBIGUOUS_CONFLICT,
+                risk_level=RiskLevel.HIGH,
+                explanation=f"Ambiguous amount reading detected with candidate figures: {unique_cands}.",
+                readings=readings,
+                metadata={"candidates": unique_cands}
+            )
+
+        # Check that there is at least one deterministic reading (not just an LLM / agent proposal)
+        def _is_proposal(r: ReadingSource) -> bool:
+            if getattr(r, "is_proposal", False):
+                return True
+            sname = r.source_name.lower()
+            return any(k in sname for k in ["proposal", "llm", "agent", "tool_call"])
+
+        has_deterministic_reading = any(not _is_proposal(r) for r in valid_readings)
+        if not has_deterministic_reading:
+            return GuardDecision(
+                action=GuardAction.RE_ASK,
+                reason_code=ReasonCode.PARSE_UNRECOGNIZED,
+                risk_level=RiskLevel.HIGH,
+                explanation="An LLM-generated amount is a proposal, not the authority to move money. No validated deterministic reading was available.",
+                readings=readings
+            )
+
         amounts = [r.amount_inr for r in valid_readings]
         unique_amounts = sorted(list(set(amounts)))
+
+        # Check absolute maximum transaction limit (₹100,000,000)
+        for a in unique_amounts:
+            if a > 100_000_000:
+                return GuardDecision(
+                    action=GuardAction.ESCALATE,
+                    reason_code=ReasonCode.EXCEEDS_MAX_LIMIT,
+                    risk_level=RiskLevel.CRITICAL,
+                    explanation=f"Amount (Rs. {a:,}) exceeds maximum allowable transaction limit (Rs. 100,000,000).",
+                    readings=readings
+                )
 
         # Case 1: All available readings agree on a single amount
         if len(unique_amounts) == 1:
@@ -177,4 +221,79 @@ class SahiGuard:
                 )
             )
 
+        return self.evaluate(readings)
+
+    def evaluate_confirmation(
+        self,
+        proposed_amount: int,
+        proposed_payee: str,
+        confirmed_amount: Optional[int],
+        confirmed_payee: Optional[str],
+        is_confirmed: bool = True
+    ) -> GuardDecision:
+        """
+        Validates confirmation integrity: confirmation must be bound to specific transaction details.
+        Missing, stale, invalid or mismatched confirmation cannot authorize execution.
+        Changes in amount or recipient invalidate previous confirmation.
+        """
+        if not proposed_payee or not proposed_payee.strip():
+            return GuardDecision(
+                action=GuardAction.RE_ASK,
+                reason_code=ReasonCode.RECIPIENT_MISSING_OR_INVALID,
+                risk_level=RiskLevel.HIGH,
+                explanation="Recipient information is missing or invalid.",
+                readings=[]
+            )
+
+        if not is_confirmed:
+            return GuardDecision(
+                action=GuardAction.RE_ASK,
+                reason_code=ReasonCode.CONFIRMATION_MISMATCH,
+                risk_level=RiskLevel.HIGH,
+                explanation="User confirmation was not granted.",
+                readings=[]
+            )
+
+        if confirmed_amount is None or confirmed_amount <= 0:
+            return GuardDecision(
+                action=GuardAction.RE_ASK,
+                reason_code=ReasonCode.CONFIRMATION_MISMATCH,
+                risk_level=RiskLevel.HIGH,
+                explanation="Confirmed amount is missing or non-positive.",
+                readings=[]
+            )
+
+        if not confirmed_payee or not confirmed_payee.strip():
+            return GuardDecision(
+                action=GuardAction.RE_ASK,
+                reason_code=ReasonCode.CONFIRMATION_MISMATCH,
+                risk_level=RiskLevel.HIGH,
+                explanation="Confirmed recipient payee is missing or invalid.",
+                readings=[]
+            )
+
+        if confirmed_amount != proposed_amount:
+            is_p10, factor = is_power_of_ten_discrepancy(proposed_amount, confirmed_amount)
+            return GuardDecision(
+                action=GuardAction.ESCALATE if is_p10 else GuardAction.RE_ASK,
+                reason_code=ReasonCode.CONFIRMATION_MISMATCH,
+                risk_level=RiskLevel.CRITICAL if is_p10 else RiskLevel.HIGH,
+                discrepancy_factor=factor if is_p10 else None,
+                explanation=f"Confirmed amount (Rs. {confirmed_amount:,}) does not match proposed amount (Rs. {proposed_amount:,}). Authorization invalidated.",
+                readings=[
+                    ReadingSource(source_name="proposed_amount", amount_inr=proposed_amount),
+                    ReadingSource(source_name="confirmed_amount", amount_inr=confirmed_amount),
+                ]
+            )
+
+        if confirmed_payee.strip().lower() != proposed_payee.strip().lower():
+            return GuardDecision(
+                action=GuardAction.ESCALATE,
+                reason_code=ReasonCode.CONFIRMATION_MISMATCH,
+                risk_level=RiskLevel.CRITICAL,
+                explanation=f"Confirmed recipient '{confirmed_payee}' does not match proposed recipient '{proposed_payee}'. Authorization invalidated.",
+                readings=[]
+            )
+
+        readings = [ReadingSource(source_name="confirmed_amount", amount_inr=proposed_amount)]
         return self.evaluate(readings)

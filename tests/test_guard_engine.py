@@ -106,3 +106,101 @@ def test_guard_zero_or_negative(guard):
     assert dec.action == GuardAction.ESCALATE
     assert dec.reason_code == ReasonCode.ZERO_OR_NEGATIVE_AMOUNT
     assert dec.risk_level == RiskLevel.CRITICAL
+
+def test_guard_rejects_agent_proposal_alone(guard):
+    # LLM proposed amount without any validated deterministic speech parser reading
+    readings = [ReadingSource(source_name="sarvam_105b_proposal", amount_inr=5000)]
+    dec = guard.evaluate(readings)
+    assert dec.action == GuardAction.RE_ASK
+    assert dec.reason_code == ReasonCode.PARSE_UNRECOGNIZED
+
+def test_guard_confirmation_amount_mismatch(guard):
+    # Proposed 5,000 but confirmation says 50,000 (10x mismatch)
+    dec = guard.evaluate_confirmation(
+        proposed_amount=5000,
+        proposed_payee="ramesh@upi",
+        confirmed_amount=50000,
+        confirmed_payee="ramesh@upi",
+        is_confirmed=True
+    )
+    assert dec.action == GuardAction.ESCALATE
+    assert dec.reason_code == ReasonCode.CONFIRMATION_MISMATCH
+    assert dec.risk_level == RiskLevel.CRITICAL
+
+def test_guard_confirmation_recipient_mismatch(guard):
+    # Proposed ramesh@upi but confirmed suresh@upi
+    dec = guard.evaluate_confirmation(
+        proposed_amount=5000,
+        proposed_payee="ramesh@upi",
+        confirmed_amount=5000,
+        confirmed_payee="suresh@upi",
+        is_confirmed=True
+    )
+    assert dec.action == GuardAction.ESCALATE
+    assert dec.reason_code == ReasonCode.CONFIRMATION_MISMATCH
+    assert dec.risk_level == RiskLevel.CRITICAL
+
+def test_guard_confirmation_unconfirmed(guard):
+    dec = guard.evaluate_confirmation(
+        proposed_amount=5000,
+        proposed_payee="ramesh@upi",
+        confirmed_amount=5000,
+        confirmed_payee="ramesh@upi",
+        is_confirmed=False
+    )
+    assert dec.action == GuardAction.RE_ASK
+    assert dec.reason_code == ReasonCode.CONFIRMATION_MISMATCH
+
+def test_guard_missing_recipient(guard):
+    dec = guard.evaluate_confirmation(
+        proposed_amount=5000,
+        proposed_payee="",
+        confirmed_amount=5000,
+        confirmed_payee="",
+        is_confirmed=True
+    )
+    assert dec.action == GuardAction.RE_ASK
+    assert dec.reason_code == ReasonCode.RECIPIENT_MISSING_OR_INVALID
+
+
+def test_guard_explicit_is_proposal_flag(guard):
+    # Source without proposal in name, but flagged is_proposal=True
+    readings = [ReadingSource(source_name="sarvam_llm_tool_call", amount_inr=5000, is_proposal=True)]
+    dec = guard.evaluate(readings)
+    assert dec.action == GuardAction.RE_ASK
+    assert dec.reason_code == ReasonCode.PARSE_UNRECOGNIZED
+
+
+def test_guard_reading_ambiguous_blocks_execution(guard):
+    # Parser reading is ambiguous with candidates [500, 5000]; LLM proposal is 5000
+    # Must NOT select 5000 or execute! Must halt with RE_ASK
+    readings = [
+        ReadingSource(
+            source_name="transcribe_parser",
+            amount_inr=None,
+            status="AMBIGUOUS",
+            candidates=[500, 5000],
+            is_proposal=False
+        ),
+        ReadingSource(
+            source_name="llm_agent_call",
+            amount_inr=5000,
+            status="PARSED",
+            is_proposal=True
+        ),
+    ]
+    dec = guard.evaluate(readings)
+    assert dec.action == GuardAction.RE_ASK
+    assert dec.reason_code in (ReasonCode.PARSE_AMBIGUOUS_SELF_CORRECTION, ReasonCode.PARSE_AMBIGUOUS_CONFLICT)
+
+
+def test_guard_amount_ceiling_escalation(guard):
+    # Amount > 100,000,000 must escalate
+    readings = [
+        ReadingSource(source_name="transcribe_parser", amount_inr=150_000_000, is_proposal=False),
+        ReadingSource(source_name="codemix_parser", amount_inr=150_000_000, is_proposal=False),
+    ]
+    dec = guard.evaluate(readings)
+    assert dec.action == GuardAction.ESCALATE
+    assert dec.reason_code == ReasonCode.EXCEEDS_MAX_LIMIT
+    assert dec.risk_level == RiskLevel.CRITICAL

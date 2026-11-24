@@ -12,6 +12,21 @@ ENGLISH_SCALES = {
     "lacs": 100_000,
     "crore": 10_000_000,
     "crores": 10_000_000,
+    # Hinglish & regional scales common in Indian English
+    "hazar": 1_000,
+    "hazaar": 1_000,
+    "sau": 100,
+    "koti": 10_000_000,
+    "velu": 1_000,
+    "vela": 1_000,
+    "vanda": 100,
+    "vandalu": 100,
+    "vandala": 100,
+    "kotlu": 10_000_000,
+    "kotla": 10_000_000,
+    "laksha": 100_000,
+    "lakshalu": 100_000,
+    "lakshala": 100_000,
 }
 
 HINDI_SCALES = {
@@ -26,36 +41,52 @@ HINDI_SCALES = {
 
     # Hindi Devanagari
     "सौ": 100,
+    "सैकड़ा": 100,
+    "सैकड़े": 100,
     "हज़ार": 1_000,
     "हजार": 1_000,
     "लाख": 100_000,
     "करोड़": 10_000_000,
+    "करोड": 10_000_000,
 }
 
 TELUGU_SCALES = {
     # Telugu Latin
     "vanda": 100,
     "vandalu": 100,
+    "vandala": 100,
     "vela": 1_000,
     "velu": 1_000,
     "veylu": 1_000,
+    "veyyi": 1_000,
     "laksha": 100_000,
     "lakshalu": 100_000,
+    "lakshala": 100_000,
     "koti": 10_000_000,
     "kotlu": 10_000_000,
+    "kotla": 10_000_000,
 
     # Telugu Script
     "వంద": 100,
     "వందలు": 100,
+    "వందల": 100,
     "వేలు": 1_000,
     "వేల": 1_000,
+    "వెయ్యి": 1_000,
+    "వెయ్య": 1_000,
     "లక్ష": 100_000,
     "లక్షలు": 100_000,
+    "లక్షల": 100_000,
     "కోటి": 10_000_000,
     "కోట్లు": 10_000_000,
+    "కోట్ల": 10_000_000,
 }
 
-ALL_SCALES = {**ENGLISH_SCALES, **HINDI_SCALES, **TELUGU_SCALES}
+MAX_AMOUNT_INR = 100_000_000  # ₹10 crore maximum allowable transaction amount
+
+# Combined scale dictionary for multi-lingual scale lookups.
+# Excludes English word 'so' to prevent collision with English prose (e.g. "pay 10 so we can start").
+ALL_SCALES = {k: v for k, v in {**ENGLISH_SCALES, **HINDI_SCALES, **TELUGU_SCALES}.items() if k != "so"}
 
 # English Units (1-99)
 ENGLISH_UNITS = {

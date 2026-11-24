@@ -36,8 +36,13 @@ Expected output (formatted):
     "parsed_amount": 2500,
     "llm_proposal": 2500,
     "guard_decision": "EXECUTE",
-    "reason_code": null,
-    "ledger": [{"amount": 2500, "utterance": "₹2500 भेजो"}]
+    "reason_code": "AGREEMENT_VERIFIED",
+    "ledger": [
+      {
+        "amount": 2500,
+        "utterance": "₹2500 भेजो"
+      }
+    ]
   },
   {
     "scenario": "B_WRONG_AMOUNT",
@@ -56,7 +61,7 @@ Expected output (formatted):
     "parsed_amount": null,
     "llm_proposal": null,
     "guard_decision": "RE_ASK",
-    "reason_code": "SELF_CORRECTION",
+    "reason_code": "PARSE_AMBIGUOUS_SELF_CORRECTION",
     "ledger": []
   }
 ]

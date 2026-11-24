@@ -21,7 +21,10 @@ class ReasonCode(str, Enum):
     PARSE_UNRECOGNIZED = "PARSE_UNRECOGNIZED"
     READING_DISCREPANCY = "READING_DISCREPANCY"
     ZERO_OR_NEGATIVE_AMOUNT = "ZERO_OR_NEGATIVE_AMOUNT"
+    EXCEEDS_MAX_LIMIT = "EXCEEDS_MAX_LIMIT"
     MISSING_READINGS = "MISSING_READINGS"
+    CONFIRMATION_MISMATCH = "CONFIRMATION_MISMATCH"
+    RECIPIENT_MISSING_OR_INVALID = "RECIPIENT_MISSING_OR_INVALID"
 
 class RiskLevel(str, Enum):
     LOW = "LOW"
@@ -34,6 +37,9 @@ class ReadingSource(BaseModel):
     amount_inr: Optional[int] = Field(None, description="Extracted integer INR amount, if any")
     raw_text: Optional[str] = None
     confidence: float = 1.0
+    is_proposal: bool = Field(False, description="True if reading is an unverified LLM/agent proposal")
+    status: Optional[str] = Field(None, description="Parse status if from amount engine (e.g. PARSED, AMBIGUOUS, UNRECOGNIZED)")
+    candidates: List[int] = Field(default_factory=list, description="Candidate amounts if ambiguous")
 
 from typing import ClassVar
 
