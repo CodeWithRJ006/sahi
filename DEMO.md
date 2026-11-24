@@ -14,7 +14,7 @@ The demo prints a JSON summary of each scenario, writes the same data to `demo_r
 
 ```bash
 # Install project dependencies (if not already installed)
-pip install -r requirements.txt
+pip install -e ".[dev]"
 ```
 
 The demo does not require audio files, network access, or API keys – it relies on mocked adapters inside the existing `Pipeline` implementation (using `mock_mode=True`).

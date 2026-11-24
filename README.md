@@ -34,11 +34,11 @@ SAHI establishes the core architectural principle: **an LLM-generated amount is 
    - Detects catastrophic power-of-ten mismatches (10x, 100x, 1000x) and escalates.
    - Detects phonetic confusable pairs and prompts for clarification.
    - Enforces straight-through execution limits (default ₹50,000) requiring explicit user read-back for high-value amounts.
-   - Validates user confirmation integrity: confirmations are strictly bound to specific amounts and recipient payees.
+   - Includes a unit-tested confirmation binding helper (`evaluate_confirmation`) for checking confirmed amount and recipient payee consistency (standalone helper; not yet wired into `SahiPipeline` end-to-end).
    - Fail-closed security: missing, ambiguous, or unvalidated proposals cannot execute.
 
 3. **Atomic Mock Bank Ledger (`MockBankDatabase` / FastAPI Service)**:
-   - Thread-safe, process-safe simulated banking ledger using SQLite with transaction atomicity.
+   - Process-local thread-safe simulated banking ledger using SQLite (`WAL` mode and a single-process `threading.Lock`) with transaction atomicity. Cross-process concurrency is not managed by an external lock manager.
    - Strict transfer idempotency preventing duplicate debits.
    - Boundary validation for strictly positive amounts, account balance sufficiency, and ceiling limits.
    - Complete audit logging and ledger history.
@@ -80,7 +80,7 @@ SAHI establishes the core architectural principle: **an LLM-generated amount is 
 │  - Power-of-ten mismatch detection (10x, 100x)   │
 │  - Phonetic confusable pair checks               │
 │  - High-value read-back policy enforcement       │
-│  - Confirmation & payee binding checks           │
+│  - Standalone confirmation & payee binding helper│
 └────────────────────────┬─────────────────────────┘
                          │
      ┌───────────────────┼───────────────────┐
@@ -214,6 +214,8 @@ The mock bank ledger (`MockBankDatabase`) is an **isolated SQLite simulation**.
 1. **Dialect and Colloquial Vocabulary**: Telugu and Hindi dialects have varied regional colloquialisms. While common forms (*dhai*, *dedh*, *vandalu*, *kotlu*, *lakshalu*) are fully supported, localized slang outside these sets defaults to `UNRECOGNIZED`.
 2. **Sub-Rupee Paise Settlement**: Non-integer decimal paise amounts (e.g. `12.75 rupees`) or fractional paise expressions are flagged as `FRACTION_AMBIGUITY` rather than silently rounded, adhering to bank safety principles.
 3. **Synthetic Speech Fixtures**: The evaluation metrics in `report/index.html` reflect offline benchmark simulations. Live acoustic validation across physical speakers remains outside the repository's offline verification boundary.
+4. **Process-Local Locking**: `MockBankDatabase` uses a Python `threading.Lock` for thread safety within a single process, plus SQLite `WAL` mode. It does not implement cross-process application-level locking across separate server processes.
+5. **Standalone Confirmation Helper**: `SahiGuard.evaluate_confirmation` is implemented and unit-tested as a standalone guard helper; `SahiPipeline` and the FastAPI `/transfer` endpoint do not currently execute a multi-turn confirmation workflow calling it end-to-end.
 
 ---
 
