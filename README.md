@@ -34,7 +34,7 @@ SAHI establishes the core architectural principle: **an LLM-generated amount is 
    - Detects catastrophic power-of-ten mismatches (10x, 100x, 1000x) and escalates.
    - Detects phonetic confusable pairs and prompts for clarification.
    - Enforces straight-through execution limits (default ₹50,000) requiring explicit user read-back for high-value amounts.
-   - Includes a unit-tested confirmation binding helper (`evaluate_confirmation`) for checking confirmed amount and recipient payee consistency (standalone helper; not yet wired into `SahiPipeline` end-to-end).
+   - Includes confirmation binding verification via `evaluate_confirmation` to ensure confirmed amount and recipient payee strictly match the proposal before simulated ledger execution.
    - Fail-closed security: missing, ambiguous, or unvalidated proposals cannot execute.
 
 3. **Atomic Mock Bank Ledger (`MockBankDatabase` / FastAPI Service)**:
@@ -80,7 +80,7 @@ SAHI establishes the core architectural principle: **an LLM-generated amount is 
 │  - Power-of-ten mismatch detection (10x, 100x)   │
 │  - Phonetic confusable pair checks               │
 │  - High-value read-back policy enforcement       │
-│  - Standalone confirmation & payee binding helper│
+│  - Confirmation & payee binding verification     │
 └────────────────────────┬─────────────────────────┘
                          │
      ┌───────────────────┼───────────────────┐
@@ -190,6 +190,17 @@ To view CLI options:
 python scripts/run_live_pilot.py --help
 ```
 
+### 6. Run the Interactive Voice & Safety Web UI (SAHI Live)
+Launches the browser-based demonstration with microphone push-to-talk, preset scenarios, deterministic guard analysis, and live confirmation against the simulated ledger:
+```powershell
+python -m uvicorn sahi.bank.app:app --host 127.0.0.1 --port 8000
+```
+Open `http://127.0.0.1:8000/` in your browser.
+- **Microphone Push-To-Talk**: Record audio in Hindi, Telugu, Hinglish, or English.
+- **Preset Safety Scenarios**: Click preset buttons to test Agreement, 10x Mismatch escalation, or Ambiguous self-correction.
+- **Confirmation Flow**: Safe amounts surface an explicit confirmation button wired to `evaluate_confirmation` before updating the mock bank ledger.
+- **Interactive OpenAPI Documentation**: Visit `http://127.0.0.1:8000/docs` to test raw API endpoints.
+
 ---
 
 ## Mock Banking Simulation Guarantee
@@ -215,7 +226,7 @@ The mock bank ledger (`MockBankDatabase`) is an **isolated SQLite simulation**.
 2. **Sub-Rupee Paise Settlement**: Non-integer decimal paise amounts (e.g. `12.75 rupees`) or fractional paise expressions are flagged as `FRACTION_AMBIGUITY` rather than silently rounded, adhering to bank safety principles.
 3. **Synthetic Speech Fixtures**: The evaluation metrics in `report/index.html` reflect offline benchmark simulations. Live acoustic validation across physical speakers remains outside the repository's offline verification boundary.
 4. **Process-Local Locking**: `MockBankDatabase` uses a Python `threading.Lock` for thread safety within a single process, plus SQLite `WAL` mode. It does not implement cross-process application-level locking across separate server processes.
-5. **Standalone Confirmation Helper**: `SahiGuard.evaluate_confirmation` is implemented and unit-tested as a standalone guard helper; `SahiPipeline` and the FastAPI `/transfer` endpoint do not currently execute a multi-turn confirmation workflow calling it end-to-end.
+5. **Confirmation Binding Integration**: `SahiGuard.evaluate_confirmation` is unit-tested and integrated into the `POST /api/voice/confirm` endpoint and SAHI Live web interface. The batch evaluation script `SahiPipeline.process_utterance` executes single-turn instructions without multi-turn interactive confirmation.
 
 ---
 

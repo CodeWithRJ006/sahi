@@ -197,3 +197,93 @@ def test_concurrent_transfers_consistency(test_db):
     final_acc = test_db.get_account("ACC_USER_001")
     expected_balance = initial_balance - (transfer_amount * num_threads)
     assert final_acc.balance_inr == expected_balance
+
+
+def test_get_live_ui(client):
+    res = client.get("/")
+    assert res.status_code == 200
+    assert "SAHI Live" in res.text
+
+    res_live = client.get("/live")
+    assert res_live.status_code == 200
+    assert "SAHI Live" in res_live.text
+
+
+def test_voice_process_execute_scenario(client):
+    payload = {
+        "text": "₹2500 भेजो",
+        "to_payee": "ramesh@upi",
+        "from_account": "ACC_USER_001",
+        "agent_proposed_amount": 2500
+    }
+    res = client.post("/api/voice/process", json=payload)
+    assert res.status_code == 200
+    data = res.json()
+    assert data["guard_action"] == "EXECUTE"
+    assert data["parsed_amount"] == 2500
+    assert data["reason_code"] == "AGREEMENT_VERIFIED"
+    assert data["can_confirm"] is True
+    assert data["pending_transfer"]["amount_inr"] == 2500
+
+
+def test_voice_process_10x_mismatch_escalate(client):
+    payload = {
+        "text": "₹5000 పంపించు",
+        "to_payee": "ramesh@upi",
+        "from_account": "ACC_USER_001",
+        "agent_proposed_amount": 50000
+    }
+    res = client.post("/api/voice/process", json=payload)
+    assert res.status_code == 200
+    data = res.json()
+    assert data["guard_action"] == "ESCALATE"
+    assert data["reason_code"] == "POWER_OF_TEN_MISMATCH"
+    assert data["can_confirm"] is False
+
+
+def test_voice_process_ambiguous_self_correction_reask(client):
+    payload = {
+        "text": "send 500 no wait 5000",
+        "to_payee": "ramesh@upi",
+        "from_account": "ACC_USER_001"
+    }
+    res = client.post("/api/voice/process", json=payload)
+    assert res.status_code == 200
+    data = res.json()
+    assert data["guard_action"] == "RE_ASK"
+    assert data["reason_code"] == "PARSE_AMBIGUOUS_SELF_CORRECTION"
+    assert data["can_confirm"] is False
+
+
+def test_voice_confirm_flow(client):
+    # Step 1: Matching confirmation executes transfer
+    payload_ok = {
+        "from_account": "ACC_USER_001",
+        "to_payee": "ramesh@upi",
+        "proposed_amount": 2500,
+        "confirmed_amount": 2500,
+        "confirmed_payee": "ramesh@upi",
+        "is_confirmed": True
+    }
+    res_ok = client.post("/api/voice/confirm", json=payload_ok)
+    assert res_ok.status_code == 200
+    data_ok = res_ok.json()
+    assert data_ok["success"] is True
+    assert data_ok["status"] == "SUCCESS"
+    assert data_ok["amount_inr"] == 2500
+
+    # Step 2: Mismatched confirmed amount is rejected by evaluate_confirmation
+    payload_mismatch = {
+        "from_account": "ACC_USER_001",
+        "to_payee": "ramesh@upi",
+        "proposed_amount": 2500,
+        "confirmed_amount": 25000,  # Altered!
+        "confirmed_payee": "ramesh@upi",
+        "is_confirmed": True
+    }
+    res_mismatch = client.post("/api/voice/confirm", json=payload_mismatch)
+    assert res_mismatch.status_code == 200
+    data_mismatch = res_mismatch.json()
+    assert data_mismatch["success"] is False
+    assert data_mismatch["status"] == "CONFIRMATION_REJECTED"
+    assert data_mismatch["reason_code"] == "CONFIRMATION_MISMATCH"

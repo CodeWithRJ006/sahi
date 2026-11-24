@@ -82,10 +82,26 @@ Only the fixture data for transcripts and LLM proposals is hard‑coded for repr
 
 ## Limitations
 
-* No real audio files are processed – the demo works purely with text fixtures.
-* No live calls to Saaras, Sarvam, or TTS providers are made.
+* No real audio files are processed in `sahi.demo` – the terminal demo works purely with text fixtures.
+* No live calls to Saaras, Sarvam, or TTS providers are made unless configured in `.env`.
 * Results are synthetic; they illustrate the control flow rather than performance or cost.
 
 ---
 
-For a real‑audio pilot, see `LIVE_PILOT_PREFLIGHT.md`.
+## Interactive SAHI Live Browser Demo
+
+To launch the interactive browser interface with push-to-talk microphone support, preset safety scenarios, and simulated ledger execution:
+
+```bash
+python -m uvicorn sahi.bank.app:app --host 127.0.0.1 --port 8000
+```
+
+Open `http://127.0.0.1:8000/` in your browser:
+1. **Push-to-Talk Voice Input**: Click the microphone icon to record speech in Hindi, Telugu, Hinglish, or English (or click any of the preset scenario buttons).
+2. **Deterministic Safety Guard**: Observe SahiGuard's real-time safety classification (`EXECUTE`, `READ_BACK`, `RE_ASK`, `ESCALATE`), reason code, and candidate figures.
+3. **Confirmation & Ledger Execution**: For approved transactions, click "Confirm Payment" to execute against the simulated SQLite bank ledger via `SahiGuard.evaluate_confirmation`.
+4. **Live Audit Trail**: View real-time account balances and transaction ledger records.
+
+---
+
+For a real‑audio pilot preflight, see `LIVE_PILOT_PREFLIGHT.md`.
